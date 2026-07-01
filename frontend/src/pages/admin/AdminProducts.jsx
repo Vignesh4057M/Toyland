@@ -1,0 +1,23 @@
+import React, { useEffect, useMemo, useState } from "react";
+import { Pencil, Search, Trash2 } from "lucide-react";
+import api, { imgUrl } from "../../api/api";
+import "./AdminCommon.css";
+
+const toyCategories = ["Educational Toys", "Action Figures", "Building Blocks", "Soft Toys", "Baby Toys", "Outdoor Toys", "Puzzle Toys", "Remote Control Toys"];
+const emptyForm = { name: "", mainCategory: "Educational Toys", subCategory: "", price: "", discountPrice: "", stock: "", sizes: "", colors: "", about: "", description: "", status: "Active" };
+
+export default function AdminProducts() {
+  const [products, setProducts] = useState([]);
+  const [form, setForm] = useState(emptyForm);
+  const [files, setFiles] = useState([]);
+  const [search, setSearch] = useState("");
+  const loadProducts = () => api.get("/products").then((res) => setProducts(res.data)).catch(() => setProducts([]));
+  useEffect(() => { loadProducts(); }, []);
+  const filtered = useMemo(() => products.filter((p) => p.name?.toLowerCase().includes(search.toLowerCase())), [products, search]);
+  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleFiles = (e) => setFiles(Array.from(e.target.files || []));
+  const saveProduct = async (e) => { e.preventDefault(); const fd = new FormData(); Object.entries(form).forEach(([k,v]) => fd.append(k,v)); files.forEach((file) => fd.append("images", file)); if (form._id) await api.put(`/products/${form._id}`, fd); else await api.post("/products", fd); setForm(emptyForm); setFiles([]); loadProducts(); alert("Product saved"); };
+  const editProduct = (p) => setForm({ ...emptyForm, ...p, sizes: (p.sizes || []).join(","), colors: (p.colors || []).join(",") });
+  const deleteProduct = async (id) => { if (confirm("Delete this product?")) { await api.delete(`/products/${id}`); loadProducts(); } };
+  return <section><div className="hero-panel admin-hero"><p>Inventory</p><h1>Product Manager</h1><p>Add, edit and manage ToyLand products.</p></div><form className="card admin-form" onSubmit={saveProduct}><h2>{form._id ? "Update Product" : "Add New Product"}</h2><div className="form-grid"><input className="input" name="name" value={form.name} onChange={handleChange} placeholder="Product name" required /><input className="input" name="subCategory" value={form.subCategory || ""} onChange={handleChange} placeholder="Sub category" /><input className="input" name="price" value={form.price} onChange={handleChange} placeholder="Price" required /><input className="input" name="discountPrice" value={form.discountPrice || ""} onChange={handleChange} placeholder="Discount price" /><input className="input" name="stock" value={form.stock || ""} onChange={handleChange} placeholder="Stock" /><input className="input" name="sizes" value={form.sizes || ""} onChange={handleChange} placeholder="Sizes comma separated" /><input className="input" name="colors" value={form.colors || ""} onChange={handleChange} placeholder="Colors comma separated" /><select className="input" name="mainCategory" value={form.mainCategory} onChange={handleChange}>{toyCategories.map((c) => <option key={c}>{c}</option>)}</select><select className="input" name="status" value={form.status} onChange={handleChange}><option>Active</option><option>Inactive</option></select><input className="input" type="file" multiple onChange={handleFiles} /></div><textarea className="input" style={{marginTop:14}} name="about" value={form.about || ""} onChange={handleChange} placeholder="About product" /><textarea className="input" style={{marginTop:14}} name="description" value={form.description || ""} onChange={handleChange} placeholder="Description" /><button className="btn-primary" style={{marginTop:16}} type="submit">{form._id ? "Update Product" : "Add Product"}</button></form><div className="card admin-search-bar"><h2>All Products</h2><input className="input" style={{maxWidth:360}} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products" /></div><div className="admin-card-grid">{filtered.map((product) => <div className="card admin-product-card" key={product._id}><img src={imgUrl(product.images?.[0])} alt={product.name} /><div className="admin-product-body"><small>{product.mainCategory}</small><h3>{product.name}</h3><strong>₹{product.discountPrice || product.price}</strong><div className="admin-actions"><button className="btn-soft" onClick={() => editProduct(product)}><Pencil size={16} /> Edit</button><button className="btn-danger" onClick={() => deleteProduct(product._id)}><Trash2 size={16} /> Delete</button></div></div></div>)}</div></section>;
+}

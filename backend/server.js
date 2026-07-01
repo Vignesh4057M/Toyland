@@ -1,0 +1,48 @@
+require("dotenv").config();
+
+
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const path = require("path");
+const connectDB = require("./config/db");
+
+const app = express();
+
+connectDB();
+
+app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(cors({ origin: process.env.FRONTEND_URL || "*", credentials: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/admin", require("./routes/adminRoutes"));
+app.use("/api/products", require("./routes/productRoutes"));
+app.use("/api/cart", require("./routes/cartRoutes"));
+app.use("/api/favourites", require("./routes/favouriteRoutes"));
+app.use("/api/orders", require("./routes/orderRoutes"));
+app.use("/api/payment", require("./routes/paymentRoutes"));
+app.use("/api/address", require("./routes/addressRoutes"));
+
+app.get("/", (req, res) => {
+  res.json({ message: "ToyLand API running" });
+});
+
+app.get("/api", (req, res) => {
+  res.json({ message: "ToyLand API running" });
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+});

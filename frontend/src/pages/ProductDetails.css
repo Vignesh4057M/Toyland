@@ -1,0 +1,277 @@
+/* PRODUCT DETAILS PAGE */
+
+.toy-product-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* IMAGE CARD */
+
+.toy-product-image-card {
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  border: 1px solid #e2e8f0;
+
+  background: #f8fafc;
+
+  box-shadow:
+    0 15px 35px rgba(15,23,42,.05);
+}
+
+.toy-product-image-card img {
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  transition: transform .35s ease;
+}
+
+.toy-product-image-card:hover img {
+  transform: scale(1.04);
+}
+
+/* CONTENT CARD */
+
+.toy-product-content-card {
+  padding: 32px;
+
+  border-radius: 24px;
+
+  background: white;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 15px 35px rgba(15,23,42,.05);
+}
+
+/* CATEGORY */
+
+.toy-product-category {
+  margin: 0 0 12px;
+
+  color: #2563eb;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+}
+
+/* TITLE */
+
+.toy-product-title {
+  margin: 0 0 18px;
+
+  color: #0f172a;
+
+  font-size: clamp(2rem, 4vw, 3.2rem);
+
+  line-height: 1.1;
+
+  font-weight: 900;
+}
+
+/* DESCRIPTION */
+
+.toy-product-description {
+  color: #475569;
+
+  line-height: 1.8;
+
+  font-size: 15px;
+}
+
+/* PRICE */
+
+.toy-product-price {
+  margin: 24px 0;
+
+  display: flex;
+  align-items: baseline;
+
+  gap: 12px;
+
+  color: #1d4ed8;
+
+  font-size: 34px;
+
+  font-weight: 900;
+}
+
+.toy-product-price span {
+  color: #94a3b8;
+
+  font-size: 18px;
+
+  text-decoration: line-through;
+
+  font-weight: 500;
+}
+
+/* META INFO */
+
+.toy-product-meta {
+  display: grid;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.toy-product-meta p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.toy-product-meta strong {
+  color: #0f172a;
+}
+
+/* ACTIONS */
+
+.toy-product-actions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  margin-top: 30px;
+}
+
+.toy-product-actions button {
+  flex: 1;
+
+  min-width: 150px;
+
+  height: 52px;
+
+  border-radius: 14px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: all .25s ease;
+}
+
+/* PRIMARY BUTTON */
+
+.toy-product-cart-btn {
+  border: none;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #4f46e5
+    );
+
+  box-shadow:
+    0 12px 25px rgba(37,99,235,.18);
+}
+
+.toy-product-cart-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 18px 35px rgba(37,99,235,.24);
+}
+
+/* SECONDARY BUTTON */
+
+.toy-product-secondary-btn {
+  border: 1px solid #e2e8f0;
+
+  background: #f8fafc;
+
+  color: #0f172a;
+}
+
+.toy-product-secondary-btn:hover {
+  background: #eef2ff;
+
+  border-color: #cbd5e1;
+}
+
+/* LOADING */
+
+.toy-product-loading {
+  min-height: 280px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: white;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 24px;
+
+  color: #64748b;
+
+  font-size: 16px;
+
+  font-weight: 600;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .toy-product-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .toy-product-content-card {
+    padding: 24px;
+  }
+
+  .toy-product-price {
+    font-size: 28px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .toy-product-content-card {
+    padding: 20px;
+  }
+
+  .toy-product-title {
+    font-size: 2rem;
+  }
+
+  .toy-product-actions button {
+    min-width: 100%;
+  }
+
+  .toy-product-price {
+    font-size: 24px;
+  }
+
+  .toy-product-price span {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,311 @@
+.page-section {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+
+  background:
+    radial-gradient(circle at top left,
+      rgba(255,107,107,.20),
+      transparent 35%),
+    radial-gradient(circle at bottom right,
+      rgba(59,130,246,.18),
+      transparent 35%),
+    radial-gradient(circle at center,
+      rgba(16,185,129,.10),
+      transparent 45%),
+    linear-gradient(
+      135deg,
+      #fff7ed 0%,
+      #fef3c7 25%,
+      #eff6ff 60%,
+      #f5f3ff 100%
+    );
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card {
+  width: 100%;
+  max-width: 650px;
+
+  padding: 40px;
+
+  position: relative;
+  overflow: hidden;
+
+  background: rgba(255,255,255,.88);
+
+  backdrop-filter: blur(20px);
+
+  border-radius: 32px;
+
+  border: 1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+    0 25px 50px rgba(0,0,0,.08),
+    0 15px 35px rgba(59,130,246,.08);
+}
+
+.profile-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 6px;
+
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #f59e0b,
+    #10b981,
+    #3b82f6,
+    #8b5cf6
+  );
+}
+
+.profile-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,.12),
+      transparent
+    );
+
+  top: -60px;
+  right: -60px;
+
+  pointer-events: none;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.profile-card h2 {
+  margin: 0 0 30px;
+
+  text-align: center;
+
+  font-size: 32px;
+
+  font-weight: 900;
+
+  color: #1e293b;
+
+  letter-spacing: -.5px;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.profile-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+
+  color: #334155;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  letter-spacing: .3px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.form-group input {
+  width: 100%;
+
+  height: 58px;
+
+  padding: 0 18px;
+
+  border-radius: 18px;
+
+  border: 2px solid transparent;
+
+  background: #f8fafc;
+
+  font-size: 15px;
+
+  transition: all .35s ease;
+}
+
+.form-group input:hover {
+  background: #ffffff;
+}
+
+.form-group input:focus {
+  outline: none;
+
+  background: white;
+
+  border-color: #60a5fa;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 0 5px rgba(96,165,250,.15);
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-primary {
+  width: 100%;
+
+  height: 60px;
+
+  margin-top: 10px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #ff6b6b,
+    #ff8e53
+  );
+
+  box-shadow:
+    0 15px 30px rgba(255,107,107,.25);
+
+  transition: all .35s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 40px rgba(255,107,107,.35);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(.98);
+}
+
+.btn-primary:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+/* =========================
+   LOADING STATE
+========================= */
+
+.btn-primary:disabled {
+  background: linear-gradient(
+    135deg,
+    #94a3b8,
+    #64748b
+  );
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+
+  .profile-card {
+    padding: 28px 22px;
+    border-radius: 26px;
+  }
+
+  .profile-card h2 {
+    font-size: 26px;
+  }
+
+  .form-group input {
+    height: 54px;
+  }
+
+  .btn-primary {
+    height: 54px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .page-section {
+    padding: 20px 12px;
+  }
+
+  .profile-card {
+    padding: 20px 16px;
+    border-radius: 22px;
+  }
+
+  .profile-card h2 {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input {
+    height: 52px;
+    font-size: 14px;
+    border-radius: 15px;
+  }
+
+  .btn-primary {
+    height: 52px;
+    font-size: 14px;
+    border-radius: 15px;
+  }
+}

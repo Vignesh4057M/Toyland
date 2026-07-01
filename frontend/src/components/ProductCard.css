@@ -1,0 +1,302 @@
+.toy-product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  border-radius: 28px;
+  background: #ffffff;
+  border: 2px solid rgba(255,255,255,0.6);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.08),
+    0 30px 60px rgba(0,0,0,0.06);
+
+  transition: all 0.4s ease;
+}
+
+.toy-product-card:hover {
+  transform: translateY(-12px) scale(1.02);
+
+  box-shadow:
+    0 25px 50px rgba(255,77,109,0.15),
+    0 35px 70px rgba(124,58,237,0.15);
+}
+
+.toy-product-image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+
+  background: linear-gradient(
+    135deg,
+    #fff4e6,
+    #ffe8ec,
+    #f3e8ff
+  );
+}
+
+.toy-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.toy-product-card:hover .toy-product-image {
+  transform: scale(1.1);
+}
+
+/* Discount */
+
+.toy-discount-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    #ff4d6d,
+    #ef4444
+  );
+
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+
+  box-shadow:
+    0 10px 20px rgba(255,77,109,0.25);
+}
+
+/* Wishlist */
+
+.toy-wishlist-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+
+  color: #64748b;
+
+  transition: all 0.3s ease;
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.08);
+}
+
+.toy-wishlist-btn:hover {
+  background: #ff4d6d;
+  color: white;
+  transform: scale(1.08);
+}
+
+/* Hover Buttons */
+
+.toy-card-actions {
+  position: absolute;
+
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+
+  display: grid;
+  gap: 10px;
+
+  transform: translateY(130%);
+  transition: all 0.35s ease;
+}
+
+.toy-product-card:hover .toy-card-actions {
+  transform: translateY(0);
+}
+
+.toy-card-action-primary,
+.toy-card-action-light {
+  border: none;
+  cursor: pointer;
+
+  border-radius: 16px;
+
+  padding: 13px 16px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition: all 0.3s ease;
+}
+
+.toy-card-action-primary {
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #ff7b54,
+    #ff4d6d,
+    #7c3aed
+  );
+
+  box-shadow:
+    0 15px 30px rgba(124,58,237,0.25);
+}
+
+.toy-card-action-light {
+  background: rgba(255,255,255,0.95);
+  color: #0f172a;
+}
+
+.toy-card-action-primary:hover,
+.toy-card-action-light:hover {
+  transform: translateY(-2px);
+}
+
+/* Info */
+
+.toy-product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+}
+
+.toy-product-category {
+  margin: 0;
+
+  color: #ff7b54;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.toy-product-name {
+  margin: 10px 0 18px;
+
+  color: #0f172a;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  line-height: 1.5;
+
+  min-height: 54px;
+}
+
+.toy-product-meta {
+  margin-top: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toy-product-price {
+  font-size: 26px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.toy-product-mrp {
+  margin-left: 8px;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  text-decoration: line-through;
+}
+
+.toy-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  background: #fff7d6;
+
+  color: #d97706;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+  .toy-product-card {
+    border-radius: 22px;
+  }
+
+  .toy-product-info {
+    padding: 16px;
+  }
+
+  .toy-product-name {
+    font-size: 15px;
+    min-height: 44px;
+  }
+
+  .toy-product-price {
+    font-size: 20px;
+  }
+
+  .toy-wishlist-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .toy-card-actions {
+    display: none;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+  .toy-product-info {
+    padding: 14px;
+  }
+
+  .toy-product-name {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .toy-product-price {
+    font-size: 18px;
+  }
+
+  .toy-product-rating {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}
