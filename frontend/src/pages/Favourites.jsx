@@ -14,19 +14,22 @@ export default function Favourites() {
   }, []);
 
   return (
-    <section className="wishlist-page">
-      <div className="wishlist-container">
-        <h1 className="wishlist-page-title">
-          Wishlist
-        </h1>
+    <section className="toyland-wishlist-page">
+      <div className="toyland-wishlist-container">
 
-        <p className="wishlist-page-subtitle">
-          Your favourite toys.
-        </p>
+        <div className="toyland-wishlist-header">
+          <h1 className="toyland-wishlist-title">
+            ❤️ My Wishlist
+          </h1>
 
-        <div className="wishlist-content">
+          <p className="toyland-wishlist-subtitle">
+            Save your favourite toys and buy them anytime.
+          </p>
+        </div>
+
+        <div className="toyland-wishlist-content">
           {items.length ? (
-            <div className="wishlist-product-grid">
+            <div className="toyland-wishlist-grid">
               {items.map(
                 (item) =>
                   item.product && (
@@ -38,11 +41,21 @@ export default function Favourites() {
               )}
             </div>
           ) : (
-            <div className="wishlist-empty-card">
-              No wishlist products.
+            <div className="toyland-wishlist-empty">
+              <div className="toyland-empty-icon">
+                💖
+              </div>
+
+              <h2>Your Wishlist is Empty</h2>
+
+              <p>
+                Start adding your favourite toys to
+                see them here.
+              </p>
             </div>
           )}
         </div>
+
       </div>
     </section>
   );

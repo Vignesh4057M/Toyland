@@ -26,6 +26,7 @@ import EditProfile from "./pages/EditProfile";
 import OrderDetails from "./pages/OrderDetails";
 import ChangePassword from "./pages/ChangePassword";
 import AddressManagement from "./pages/AddressManagement";
+import Success from "./pages/Success";
 
 function UserLayout({ children }) {
   return <Layout>{children}</Layout>;
@@ -302,6 +303,15 @@ export default function App() {
             element={<AdminUsers />}
           />
         </Route>
+
+        <Route
+    path="/success"
+    element={
+        <UserLayout>
+            <Success/>
+        </UserLayout>
+    }
+/>
 
         {/* 404 */}
 

@@ -26,6 +26,7 @@ export default function ProductCard({ p }) {
       src={imgUrl(p.images?.[0])}
       alt={p.name}
       className="toy-product-image"
+      loading="lazy"
     />
 
     {discount > 0 && (

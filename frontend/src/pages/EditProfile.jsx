@@ -25,14 +25,20 @@ export default function EditProfile() {
         email,
       });
 
-      alert("Profile updated successfully");
-
-      navigate("/profile");
+      navigate("/success", {
+  state: {
+    type: "profile",
+  },
+});
     } catch (err) {
-      alert(
-        err?.response?.data?.message ||
-          "Failed to update profile"
-      );
+      navigate("/success", {
+  state: {
+    type: "error",
+    message:
+      err?.response?.data?.message ||
+      "Failed to update profile",
+  },
+});
     } finally {
       setLoading(false);
     }
@@ -47,7 +53,6 @@ export default function EditProfile() {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Name</label>
-
               <input
                 type="text"
                 value={name}
@@ -60,7 +65,6 @@ export default function EditProfile() {
 
             <div className="form-group">
               <label>Mobile Number</label>
-
               <input
                 type="text"
                 value={phone}

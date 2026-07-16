@@ -1,106 +1,284 @@
-/* PAGE */
+/* ===========================
+   TOYLAND WISHLIST
+=========================== */
 
-.wishlist-page {
-  width: 100%;
+.toyland-wishlist-page{
+    width:100%;
+    min-height:100vh;
+    padding:50px 0;
+
+    background:
+    radial-gradient(circle at top left,#ffe9f1 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#dbeafe 0%,transparent 35%),
+    linear-gradient(135deg,#fffdf7,#f8fbff);
 }
 
-.wishlist-container {
-  width: 100%;
+.toyland-wishlist-container{
+    width:min(1400px,94%);
+    margin:auto;
 }
 
-.wishlist-content {
-  margin-top: 32px;
+/* HEADER */
+
+.toyland-wishlist-header{
+
+    text-align:center;
+
+    margin-bottom:45px;
 }
 
-/* PRODUCT GRID */
+.toyland-wishlist-title{
 
-.wishlist-product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+    font-size:42px;
+
+    font-weight:900;
+
+    color:#172554;
+
+    margin-bottom:12px;
 }
 
-/* EMPTY STATE */
+.toyland-wishlist-subtitle{
 
-.wishlist-empty-card {
-  min-height: 320px;
+    font-size:17px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  border-radius: 28px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff,
-      #f8fafc
-    );
-
-  border: 1px solid #e2e8f0;
-
-  color: #64748b;
-
-  font-size: 18px;
-  font-weight: 600;
-
-  box-shadow:
-    0 15px 35px rgba(15, 23, 42, 0.04);
+    color:#64748b;
 }
 
-/* LARGE TABLET */
+/* CONTENT */
 
-@media (max-width: 1200px) {
+.toyland-wishlist-content{
 
-  .wishlist-product-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+    width:100%;
 }
 
-/* TABLET */
+/* GRID */
 
-@media (max-width: 900px) {
+.toyland-wishlist-grid{
 
-  .wishlist-product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:28px;
 }
 
-/* MOBILE */
+/* EMPTY */
 
-@media (max-width: 600px) {
+.toyland-wishlist-empty{
 
-  .wishlist-content {
-    margin-top: 24px;
-  }
+    min-height:420px;
 
-  .wishlist-product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
+    display:flex;
 
-  .wishlist-empty-card {
-    min-height: 240px;
-    font-size: 15px;
-    border-radius: 22px;
-    padding: 20px;
-  }
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.9);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.08);
+
+    padding:40px;
 }
 
-/* SMALL MOBILE */
+.toyland-empty-icon{
 
-@media (max-width: 420px) {
+    width:110px;
 
-  .wishlist-product-grid {
-    gap: 12px;
-  }
+    height:110px;
 
-  .wishlist-empty-card {
-    min-height: 200px;
-    font-size: 14px;
-  }
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:55px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#ff6b81,#ffb347);
+
+    margin-bottom:25px;
+
+    animation:toylandPulse 2s infinite;
+
+    box-shadow:
+    0 15px 40px rgba(255,107,129,.35);
+}
+
+.toyland-wishlist-empty h2{
+
+    font-size:32px;
+
+    margin-bottom:15px;
+
+    color:#0f172a;
+}
+
+.toyland-wishlist-empty p{
+
+    font-size:17px;
+
+    color:#64748b;
+
+    max-width:430px;
+
+    line-height:1.7;
+}
+
+@keyframes toylandPulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+/* ===========================
+   LAPTOP
+=========================== */
+
+@media(max-width:1200px){
+
+.toyland-wishlist-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:900px){
+
+.toyland-wishlist-title{
+
+font-size:34px;
+
+}
+
+.toyland-wishlist-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:22px;
+
+}
+
+.toyland-wishlist-empty{
+
+min-height:340px;
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:600px){
+
+.toyland-wishlist-page{
+
+padding:25px 0 80px;
+
+}
+
+.toyland-wishlist-title{
+
+font-size:28px;
+
+}
+
+.toyland-wishlist-subtitle{
+
+font-size:15px;
+
+}
+
+.toyland-wishlist-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:14px;
+
+}
+
+.toyland-empty-icon{
+
+width:80px;
+
+height:80px;
+
+font-size:40px;
+
+}
+
+.toyland-wishlist-empty{
+
+padding:25px;
+
+border-radius:24px;
+
+min-height:280px;
+
+}
+
+.toyland-wishlist-empty h2{
+
+font-size:22px;
+
+}
+
+.toyland-wishlist-empty p{
+
+font-size:14px;
+
+}
+
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media(max-width:420px){
+
+.toyland-wishlist-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.toyland-wishlist-title{
+
+font-size:24px;
+
+}
+
 }

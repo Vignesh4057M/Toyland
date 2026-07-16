@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/api";
 import "./AddressManagement.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AddressManagement() {
   const [addresses, setAddresses] = useState([]);
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     fullName: "",
@@ -59,27 +61,25 @@ export default function AddressManagement() {
 
     try {
       if (editingId) {
-        await api.put(
-          `/address/${editingId}`,
-          form
-        );
+  await api.put(`/address/${editingId}`, form);
 
-        alert(
-          "Address updated successfully"
-        );
-      } else {
-        await api.post(
-          "/address",
-          form
-        );
+  navigate("/success", {
+    state: {
+type: "addressUpdate",
+    },
+  });
+} else {
+  await api.post("/address", form);
 
-        alert(
-          "Address added successfully"
-        );
-      }
+  navigate("/success", {
+    state: {
+      type: "addressAdd",
+    },
+  });
+}
 
-      resetForm();
-      loadAddresses();
+resetForm();
+loadAddresses();
     } catch (error) {
       console.log(error);
 
@@ -112,23 +112,22 @@ export default function AddressManagement() {
   };
 
   const deleteAddress = async (id) => {
-    const confirmDelete =
-      window.confirm(
-        "Delete this address?"
-      );
+   const confirmDelete = window.confirm(
+  "Are you sure you want to delete this address?"
+);
 
     if (!confirmDelete) return;
 
     try {
-      await api.delete(
-        `/address/${id}`
-      );
+      await api.delete(`/address/${id}`);
 
-      alert(
-        "Address deleted successfully"
-      );
+navigate("/success", {
+  state: {
+    type: "addressDelete",
+  },
+});
 
-      loadAddresses();
+loadAddresses();
     } catch (error) {
       console.log(error);
 

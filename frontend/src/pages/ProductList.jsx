@@ -7,17 +7,34 @@ const categories = ["All", "Educational Toys", "Action Figures", "Building Block
 
 export default function ProductList({ category }) {
   const [products, setProducts] = useState([]);
+const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(category || "All");
 
-  useEffect(() => { setSelectedCategory(category || "All"); }, [category]);
-
   useEffect(() => {
-    const params = {};
-    if (selectedCategory !== "All") params.category = selectedCategory;
-    if (search) params.search = search;
-    api.get("/products", { params }).then((response) => setProducts(response.data)).catch(() => setProducts([]));
-  }, [selectedCategory, search]);
+  const params = {};
+
+  if (selectedCategory !== "All")
+    params.category = selectedCategory;
+
+  if (search)
+    params.search = search;
+
+  setLoading(true);
+
+  api
+    .get("/products", { params })
+    .then((response) => {
+      setProducts(response.data);
+    })
+    .catch(() => {
+      setProducts([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+
+}, [selectedCategory, search]);
 
   const title = useMemo(() => selectedCategory === "All" ? "All Toys" : selectedCategory, [selectedCategory]);
 
@@ -35,7 +52,25 @@ export default function ProductList({ category }) {
           </div>
         </div>
         <div className="product-grid-wrap">
-          {products.length ? <div className="grid-4">{products.map((product) => <ProductCard key={product._id} p={product} />)}</div> : <div className="card empty-state">No toys found.</div>}
+          {loading ? (
+    <div className="toyland-loader">
+        <div className="toy-spinner"></div>
+        <h3>Loading Toys...</h3>
+    </div>
+) : products.length ? (
+    <div className="grid-4">
+        {products.map((product) => (
+            <ProductCard
+                key={product._id}
+                p={product}
+            />
+        ))}
+    </div>
+) : (
+    <div className="card empty-state">
+        No toys found.
+    </div>
+)}
         </div>
       </div>
     </section>

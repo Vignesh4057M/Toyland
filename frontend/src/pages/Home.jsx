@@ -14,16 +14,59 @@ const categories = [
 ];
 
 export default function Home() {
+
+  const heroImages = [
+  "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=1600&q=80",
+
+  "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1600&q=80",
+
+  "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=80",
+
+  "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?auto=format&fit=crop&w=1600&q=80"
+];
+
+const [currentImage, setCurrentImage] = useState(0);
   const [products, setProducts] = useState([]);
+const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    api.get("/products").then((response) => setProducts(response.data.slice(0, 8))).catch(() => setProducts([]));
-  }, []);
+useEffect(() => {
+  setLoading(true);
 
+  api
+    .get("/products")
+    .then((response) => {
+      setProducts(response.data.slice(0, 8));
+    })
+    .catch(() => {
+      setProducts([]);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, []);
+
+useEffect(() => {
+
+  const interval = setInterval(() => {
+
+    setCurrentImage((prev) =>
+      (prev + 1) % heroImages.length
+    );
+
+  }, 4000);
+
+  return () => clearInterval(interval);
+
+}, []);
   return (
     <>
-      <section className="home-hero">
-        <div className="container home-hero-grid">
+ <section
+  className="home-hero"
+  style={{
+    backgroundImage: `url(${heroImages[currentImage]})`,
+  }}
+>
+        <div className="container ">
           <div className="hero-panel home-copy">
             <p className="home-kicker">Premium Toy Store</p>
             <h1 className="home-title">Fun toys for <span>happy kids</span></h1>
@@ -33,10 +76,7 @@ export default function Home() {
               <Link to="/about" className="btn-soft">About Store</Link>
             </div>
           </div>
-          <div className="home-visual">
-            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=1200&q=80" alt="ToyLand toys" />
-            <div className="home-floating-card"><strong>Safe. Colorful. Kids friendly.</strong><br />Curated toy collection for every age.</div>
-          </div>
+          
         </div>
       </section>
 
@@ -52,7 +92,25 @@ export default function Home() {
       <section className="featured-section">
         <div className="container">
           <div className="section-head"><div><h2 className="page-title">Featured Toys</h2><p className="page-subtitle">Latest products from ToyLand collection.</p></div></div>
-          {products.length ? <div className="grid-4">{products.map((product) => <ProductCard key={product._id} p={product} />)}</div> : <div className="card empty-state">No products found. Add products from admin panel.</div>}
+          {loading ? (
+    <div className="toyland-loader">
+        <div className="toy-spinner"></div>
+        <h3>Loading Toys...</h3>
+    </div>
+) : products.length ? (
+    <div className="grid-4">
+        {products.map((product) => (
+            <ProductCard
+                key={product._id}
+                p={product}
+            />
+        ))}
+    </div>
+) : (
+    <div className="card empty-state">
+        No products found.
+    </div>
+)}
         </div>
       </section>
     </>

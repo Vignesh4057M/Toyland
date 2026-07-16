@@ -1,1 +1,18 @@
-const r=require('express').Router(); const c=require('../controllers/paymentController'); const {protect}=require('../middleware/auth'); r.post('/create-order',protect,c.createOrder); r.post('/verify',protect,c.verify); module.exports=r;
+const router = require("express").Router();
+
+const paymentController = require("../controllers/paymentController");
+const { protect } = require("../middleware/auth");
+
+router.post(
+  "/create-order",
+  protect,
+  paymentController.createOrder
+);
+
+router.post(
+  "/verify",
+  protect,
+  paymentController.verifyPayment
+);
+
+module.exports = router;

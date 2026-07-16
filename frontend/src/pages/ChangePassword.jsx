@@ -27,9 +27,14 @@ export default function ChangePassword() {
       form.newPassword !==
       form.confirmPassword
     ) {
-      return alert(
-        "Passwords do not match"
-      );
+      navigate("/success", {
+  state: {
+    type: "error",
+    message: "Passwords do not match",
+  },
+});
+
+return;
     }
 
     try {
@@ -43,21 +48,25 @@ export default function ChangePassword() {
         }
       );
 
-      alert(
-        "Password changed successfully"
-      );
-
-      navigate("/profile");
+      navigate("/success", {
+  state: {
+    type: "password",
+  },
+});
     } catch (err) {
   console.log("FULL ERROR =>", err);
   console.log("RESPONSE =>", err.response);
   console.log("MESSAGE =>", err.message);
 
-  alert(
-    err.response?.data?.message ||
-    err.message ||
-    "Something went wrong"
-  );
+  navigate("/success", {
+  state: {
+    type: "error",
+    message:
+      err.response?.data?.message ||
+      err.message ||
+      "Something went wrong",
+  },
+});
 }
   };
 
