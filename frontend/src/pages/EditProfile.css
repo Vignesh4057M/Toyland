@@ -1,330 +1,552 @@
-/* ===========================
-   EDIT PROFILE - MODERN UI
-=========================== */
-
-.page-section{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:60px 20px;
-
-    background:
-    radial-gradient(circle at top left,#38bdf833 0%,transparent 30%),
-    radial-gradient(circle at bottom right,#8b5cf633 0%,transparent 30%),
-    linear-gradient(135deg,#eef8ff,#f7f4ff,#ffffff);
-}
-
-/* ===========================
-        CARD
-=========================== */
-
-.profile-card{
-    width:100%;
-    max-width:650px;
-
-    background:rgba(255,255,255,.82);
-    backdrop-filter:blur(22px);
-
-    border-radius:30px;
-
-    padding:45px;
-
-    border:1px solid rgba(255,255,255,.6);
-
-    box-shadow:
-    0 20px 50px rgba(15,23,42,.08);
-
-    position:relative;
-    overflow:hidden;
-}
-
-.profile-card::before{
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-    height:220px;
-
-    background:linear-gradient(
-    135deg,
-    #0ea5e9,
-    #6366f1);
-
-    opacity:.10;
-
-    border-radius:50%;
-
-    top:-80px;
-    right:-70px;
-}
-
-.profile-card::after{
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    background:linear-gradient(
-    135deg,
-    #14b8a6,
-    #3b82f6);
-
-    opacity:.08;
-
-    border-radius:50%;
-
-    bottom:-60px;
-    left:-60px;
-}
-
-/* ===========================
-        TITLE
-=========================== */
-
-.profile-card h2{
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-    font-size:34px;
-
-    font-weight:800;
-
-    color:#0f172a;
-
-    letter-spacing:.5px;
-}
-
-/* ===========================
-        FORM
-=========================== */
-
-.profile-card form{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:22px;
-}
-
-/* ===========================
-      FORM GROUP
-=========================== */
-
-.form-group{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-}
-
-.form-group label{
-
-    font-size:14px;
-
-    font-weight:700;
-
-    color:#334155;
-}
-
-/* ===========================
-        INPUT
-=========================== */
-
-.form-group input{
-
-    height:58px;
-
-    padding:0 18px;
-
-    border-radius:16px;
-
-    border:2px solid #e2e8f0;
-
-    background:#ffffff;
-
-    font-size:15px;
-
-    transition:.35s;
-}
-
-.form-group input:hover{
-
-    border-color:#7dd3fc;
-}
-
-.form-group input:focus{
-
-    outline:none;
-
-    border-color:#0ea5e9;
-
-    box-shadow:
-    0 0 0 5px rgba(14,165,233,.15);
-
-    transform:translateY(-2px);
-}
-
-.form-group input::placeholder{
-
-    color:#94a3b8;
-}
-
-/* ===========================
-        BUTTON
-=========================== */
-
-.btn-primary{
-
-    margin-top:12px;
-
-    height:58px;
-
-    border:none;
-
-    border-radius:18px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    color:#fff;
-
-    background:
+/* =========================================================
+   TOYLAND PREMIUM EDIT PROFILE PAGE
+========================================================= */
+
+.toy-edit-profile-page {
+  --profile-primary: #087f5b;
+  --profile-secondary: #12b886;
+  --profile-accent: #38d9a9;
+  --profile-dark: #102a24;
+  --profile-text: #536b64;
+  --profile-muted: #8a9c96;
+  --profile-white: #ffffff;
+  --profile-light: #effff9;
+  --profile-border: rgba(8, 127, 91, 0.14);
+
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 85px 18px 110px;
+  font-family:
+    "Plus Jakarta Sans",
+    "Poppins",
+    "Segoe UI",
+    sans-serif;
+  background:
+    radial-gradient(
+      circle at 10% 12%,
+      rgba(56, 217, 169, 0.2),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 92% 18%,
+      rgba(18, 184, 134, 0.15),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 70% 90%,
+      rgba(8, 127, 91, 0.1),
+      transparent 30%
+    ),
     linear-gradient(
+      145deg,
+      #effff9 0%,
+      #ffffff 48%,
+      #f3fffb 100%
+    );
+}
+
+.toy-edit-profile-page::before,
+.toy-edit-profile-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.toy-edit-profile-page::before {
+  top: -175px;
+  left: -145px;
+  width: 390px;
+  height: 390px;
+  background: linear-gradient(
     135deg,
-    #06b6d4,
-    #3b82f6,
-    #6366f1);
-
-    transition:.35s;
-
-    box-shadow:
-    0 18px 35px rgba(59,130,246,.30);
+    rgba(56, 217, 169, 0.26),
+    rgba(18, 184, 134, 0.03)
+  );
+  animation: profileShapeOne 11s ease-in-out infinite;
 }
 
-.btn-primary:hover:not(:disabled){
-
-    transform:translateY(-4px);
-
-    box-shadow:
-    0 24px 40px rgba(59,130,246,.35);
+.toy-edit-profile-page::after {
+  right: -145px;
+  bottom: -180px;
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 127, 91, 0.18),
+    rgba(56, 217, 169, 0.03)
+  );
+  animation: profileShapeTwo 13s ease-in-out infinite;
 }
 
-.btn-primary:active{
-
-    transform:scale(.97);
+.toy-edit-profile-page .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
 }
 
-.btn-primary:disabled{
+/* =========================================================
+   PROFILE CARD
+========================================================= */
 
-    background:#94a3b8;
-
-    box-shadow:none;
-
-    cursor:not-allowed;
+.toy-profile-card {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 48px;
+  border: 1px solid var(--profile-border);
+  border-radius: 32px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.09),
+      transparent 34%
+    ),
+    rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 30px 75px rgba(16, 42, 36, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  animation: profileCardIn 0.85s ease both;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.45s ease;
 }
 
-/* ===========================
-      CARD HOVER
-=========================== */
-
-.profile-card:hover{
-
-    transform:translateY(-4px);
-
-    transition:.35s;
-
-    box-shadow:
-    0 28px 60px rgba(15,23,42,.12);
+.toy-profile-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 217, 169, 0.58),
+    rgba(255, 255, 255, 0.2),
+    rgba(8, 127, 91, 0.3)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
 }
 
-/* ===========================
-        TABLET
-=========================== */
-
-@media(max-width:768px){
-
-.profile-card{
-
-    padding:32px 24px;
-
-    border-radius:24px;
+.toy-profile-card::after {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -45%;
+  width: 24%;
+  height: 260%;
+  pointer-events: none;
+  transform: rotate(24deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  transition: left 0.9s ease;
 }
 
-.profile-card h2{
-
-    font-size:28px;
+.toy-profile-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(8, 127, 91, 0.25);
+  box-shadow:
+    0 38px 90px rgba(8, 127, 91, 0.16),
+    0 0 0 7px rgba(56, 217, 169, 0.045);
 }
 
-.form-group input{
-
-    height:54px;
+.toy-profile-card:hover::after {
+  left: 125%;
 }
 
-.btn-primary{
+/* =========================================================
+   TITLE
+========================================================= */
 
-    height:54px;
+.toy-profile-card h2 {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 37px;
+  color: var(--profile-dark);
+  font-size: clamp(32px, 4vw, 43px);
+  font-weight: 950;
+  line-height: 1.15;
+  letter-spacing: -1.4px;
+  text-align: center;
 }
 
+.toy-profile-card h2::before {
+  content: "PERSONAL INFORMATION";
+  display: block;
+  width: fit-content;
+  margin: 0 auto 13px;
+  padding: 8px 15px;
+  color: var(--profile-primary);
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 2.2px;
+  border: 1px solid rgba(8, 127, 91, 0.13);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 8px 20px rgba(8, 127, 91, 0.07);
 }
 
-/* ===========================
-        MOBILE
-=========================== */
-
-@media(max-width:480px){
-
-.page-section{
-
-    padding:20px 12px;
+.toy-profile-card h2::after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 4px;
+  margin: 17px auto 0;
+  border-radius: 20px;
+  background: linear-gradient(
+    90deg,
+    var(--profile-primary),
+    var(--profile-accent)
+  );
+  box-shadow: 0 5px 14px rgba(18, 184, 134, 0.28);
+  animation: profileLineIn 0.85s 0.2s ease both;
 }
 
-.profile-card{
+/* =========================================================
+   FORM
+========================================================= */
 
-    padding:22px 18px;
-
-    border-radius:20px;
+.toy-profile-card form {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.profile-card h2{
+/* =========================================================
+   FORM GROUP
+========================================================= */
 
-    font-size:24px;
-
-    margin-bottom:25px;
+.toy-profile-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
 
-.form-group label{
-
-    font-size:13px;
+.toy-profile-form-group label {
+  color: var(--profile-dark);
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.1px;
+  transition: color 0.3s ease;
 }
 
-.form-group input{
-
-    height:50px;
-
-    font-size:14px;
-
-    border-radius:14px;
+.toy-profile-form-group:focus-within label {
+  color: var(--profile-primary);
 }
 
-.btn-primary{
+/* =========================================================
+   INPUT
+========================================================= */
 
-    height:50px;
-
-    border-radius:14px;
-
-    font-size:14px;
+.toy-profile-form-group input {
+  width: 100%;
+  height: 57px;
+  padding: 0 18px;
+  color: var(--profile-dark);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(8, 127, 91, 0.13);
+  border-radius: 15px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 8px 20px rgba(16, 42, 36, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
+.toy-profile-form-group input:hover {
+  border-color: rgba(8, 127, 91, 0.28);
+  background: var(--profile-white);
+}
+
+.toy-profile-form-group input:focus {
+  border-color: var(--profile-secondary);
+  background: var(--profile-white);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 4px rgba(18, 184, 134, 0.11),
+    0 14px 30px rgba(8, 127, 91, 0.1);
+}
+
+/* Autofill */
+
+.toy-profile-form-group input:-webkit-autofill,
+.toy-profile-form-group input:-webkit-autofill:hover,
+.toy-profile-form-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--profile-dark);
+  box-shadow: 0 0 0 1000px #ffffff inset;
+  transition: background-color 9999s ease-out;
+}
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.toy-profile-save-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 57px;
+  overflow: hidden;
+  margin-top: 6px;
+  padding: 0 20px;
+  color: var(--profile-white);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0.2px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 15px;
+  outline: none;
+  cursor: pointer;
+  background: linear-gradient(
+    135deg,
+    var(--profile-primary),
+    var(--profile-secondary),
+    var(--profile-accent)
+  );
+  background-size: 200% 200%;
+  box-shadow:
+    0 17px 35px rgba(8, 127, 91, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    background-position 0.5s ease,
+    opacity 0.35s ease;
+}
+
+.toy-profile-save-btn::before {
+  content: "";
+  position: absolute;
+  top: -70%;
+  left: -55%;
+  width: 34%;
+  height: 240%;
+  transform: rotate(24deg);
+  background: rgba(255, 255, 255, 0.32);
+  transition: left 0.7s ease;
+}
+
+.toy-profile-save-btn:hover:not(:disabled) {
+  background-position: right center;
+  transform: translateY(-5px);
+  box-shadow:
+    0 25px 46px rgba(8, 127, 91, 0.32),
+    0 0 0 5px rgba(56, 217, 169, 0.07);
+}
+
+.toy-profile-save-btn:hover:not(:disabled)::before {
+  left: 130%;
+}
+
+.toy-profile-save-btn:active:not(:disabled) {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.toy-profile-save-btn:disabled {
+  color: rgba(255, 255, 255, 0.82);
+  cursor: not-allowed;
+  opacity: 0.72;
+  background: linear-gradient(
+    135deg,
+    #7d9b91,
+    #9eb6ae
+  );
+  box-shadow: none;
+}
+
+.toy-profile-save-btn:disabled::before {
+  display: none;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes profileCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(38px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes profileLineIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes profileShapeOne {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(38px, 30px, 0) scale(1.08);
+  }
+}
+
+@keyframes profileShapeTwo {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-32px, -24px, 0) scale(1.1);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .toy-edit-profile-page {
+    padding: 62px 18px 105px;
+  }
+
+  .toy-profile-card {
+    max-width: 600px;
+    padding: 34px 26px;
+    border-radius: 27px;
+  }
+
+  .toy-profile-card h2 {
+    margin-bottom: 30px;
+    font-size: 34px;
+  }
+
+  .toy-profile-form-group input,
+  .toy-profile-save-btn {
+    height: 54px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .toy-edit-profile-page {
+    align-items: flex-start;
+    padding: 38px 13px 105px;
+  }
+
+  .toy-profile-card {
+    padding: 27px 18px;
+    border-radius: 22px;
+  }
+
+  .toy-profile-card h2 {
+    margin-bottom: 25px;
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+
+  .toy-profile-card h2::before {
+    padding: 7px 12px;
+    font-size: 8px;
+    letter-spacing: 1.7px;
+  }
+
+  .toy-profile-card h2::after {
+    width: 52px;
+    height: 3px;
+    margin-top: 13px;
+  }
+
+  .toy-profile-card form {
+    gap: 16px;
+  }
+
+  .toy-profile-form-group {
+    gap: 7px;
+  }
+
+  .toy-profile-form-group label {
+    font-size: 12.5px;
+  }
+
+  .toy-profile-form-group input {
+    height: 50px;
+    padding: 0 14px;
+    font-size: 13px;
+    border-radius: 13px;
+  }
+
+  .toy-profile-save-btn {
+    height: 50px;
+    font-size: 13.5px;
+    border-radius: 13px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.toy-profile-form-group input:focus-visible,
+.toy-profile-save-btn:focus-visible {
+  outline: 3px solid rgba(56, 217, 169, 0.5);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .toy-edit-profile-page,
+  .toy-edit-profile-page *,
+  .toy-edit-profile-page *::before,
+  .toy-edit-profile-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

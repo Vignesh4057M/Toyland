@@ -14,25 +14,24 @@ export default function Orders() {
       .catch(() => setOrders([]));
   }, []);
 
-  const getStatusClass = (status) => {
-    switch (status) {
-      case "Delivered":
-        return "status-delivered";
+ const getStatusClass = (status) => {
+  switch (status) {
+    case "Delivered":
+      return "toy-status-delivered";
 
-      case "Cancelled":
-        return "status-cancelled";
+    case "Cancelled":
+      return "toy-status-cancelled";
 
-      case "Shipped":
-        return "status-shipped";
+    case "Shipped":
+      return "toy-status-shipped";
 
-      case "Processing":
-        return "status-processing";
+    case "Processing":
+      return "toy-status-processing";
 
-      default:
-        return "status-pending";
-    }
-  };
-
+    default:
+      return "toy-status-pending";
+  }
+};
   const isStepCompleted = (currentStatus, step) => {
     const steps = [
       "Order Placed",
@@ -48,11 +47,11 @@ export default function Orders() {
   };
 
   return (
-    <section className="page-section">
-      <div className="container">
-        <h1 className="page-title">My Orders</h1>
+    <section className="toy-orders-page">
+      <div className="toy-orders-container">
+<h1 className="toy-orders-title">My Orders</h1>
 
-        <p className="page-subtitle">
+        <p className="toy-orders-subtitle">
           Track and manage your ToyLand orders.
         </p>
 
@@ -60,10 +59,10 @@ export default function Orders() {
           {orders.length ? (
             orders.map((order) => (
               <div
-                className="card order-card"
-                key={order._id}
-              >
-                <div className="order-head">
+  className="toy-order-card"
+  key={order._id}
+>
+               <div className="toy-order-product-details">
                   <div>
                     <h3>
                       Order #
@@ -256,9 +255,9 @@ export default function Orders() {
               </div>
             ))
           ) : (
-            <div className="card empty-state">
-              No orders found.
-            </div>
+            <div className="toy-orders-empty-state">
+  No orders found.
+</div>
           )}
         </div>
       </div>

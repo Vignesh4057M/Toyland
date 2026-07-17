@@ -13,12 +13,12 @@ export default function Profile() {
   };
 
   return (
-    <section className="page-section">
-      <div className="container">
-        <h1 className="page-title">My Profile</h1>
+    <section className="toy-profile-page">
+      <div className="toy-profile-container">
+        <h1 className="toy-profile-title">My Profile</h1>
 
-        <div className="card profile-card">
-          <div className="profile-row">
+        <div className="toy-profile-card">
+          <div className="toy-profile-row">
             <strong>Name</strong>
             <span>{user?.name}</span>
           </div>

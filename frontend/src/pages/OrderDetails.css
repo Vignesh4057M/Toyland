@@ -1,493 +1,847 @@
-/* ==========================================================
-   ORDER DETAILS PAGE
-========================================================== */
+/* =========================================================
+   TOYLAND PREMIUM ORDER DETAILS
+========================================================= */
 
 .tl-order-page {
-  min-height: calc(100vh - 80px);
-  padding: 40px 20px 70px;
+  --tl-primary: #087f5b;
+  --tl-secondary: #12b886;
+  --tl-accent: #38d9a9;
+  --tl-dark: #102a24;
+  --tl-text: #536b64;
+  --tl-muted: #8a9c96;
+  --tl-white: #ffffff;
+  --tl-light: #effff9;
+  --tl-soft: #f7fffc;
+  --tl-border: rgba(8, 127, 91, 0.14);
+  --tl-danger: #dc2626;
+  --tl-danger-light: #fef2f2;
+
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 75px 20px 110px;
+  font-family:
+    "Plus Jakarta Sans",
+    "Poppins",
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(56, 217, 169, 0.2),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 94% 18%,
+      rgba(18, 184, 134, 0.14),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 72% 92%,
+      rgba(8, 127, 91, 0.09),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #effff9 0%,
+      #ffffff 48%,
+      #f3fffb 100%
+    );
+}
+
+.tl-order-page::before,
+.tl-order-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.tl-order-page::before {
+  top: -180px;
+  left: -150px;
+  width: 410px;
+  height: 410px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(56, 217, 169, 0.25),
+    rgba(18, 184, 134, 0.03)
+  );
+
+  animation: tlOrderShapeOne 12s ease-in-out infinite;
+}
+
+.tl-order-page::after {
+  right: -160px;
+  bottom: -190px;
+  width: 370px;
+  height: 370px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(8, 127, 91, 0.17),
+    rgba(56, 217, 169, 0.03)
+  );
+
+  animation: tlOrderShapeTwo 14s ease-in-out infinite;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.tl-order-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.tl-order-back-btn {
+  position: relative;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  gap: 9px;
+
+  padding: 12px 21px;
+
+  color: var(--tl-primary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.1px;
+
+  border: 1px solid rgba(8, 127, 91, 0.16);
+  border-radius: 14px;
+  outline: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    0 12px 28px rgba(16, 42, 36, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  animation: tlOrderBackIn 0.65s ease both;
+
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.tl-order-back-btn::before {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -55%;
+
+  width: 32%;
+  height: 250%;
+
+  transform: rotate(24deg);
+
+  background: rgba(255, 255, 255, 0.3);
+
+  transition: left 0.7s ease;
+}
+
+.tl-order-back-btn:hover {
+  color: var(--tl-white);
+
+  border-color: transparent;
+
+  background: linear-gradient(
+    135deg,
+    var(--tl-primary),
+    var(--tl-secondary)
+  );
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 38px rgba(8, 127, 91, 0.24),
+    0 0 0 5px rgba(56, 217, 169, 0.07);
+}
+
+.tl-order-back-btn:hover::before {
+  left: 130%;
+}
+
+.tl-order-back-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* =========================================================
+   MAIN ORDER CARD
+========================================================= */
+
+.tl-order-card {
   position: relative;
   overflow: hidden;
 
-  background:
-    radial-gradient(circle at top left, rgba(255,107,107,.18), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(99,102,241,.15), transparent 40%),
-    linear-gradient(135deg,#fff7ed,#fef9ff,#eef6ff);
-}
+  min-height: 110px;
+  margin-top: 24px;
+  padding: 42px;
 
-.tl-order-container{
-  width:100%;
-  max-width:1200px;
-  margin:auto;
-}
+  color: var(--tl-dark);
 
-/* ==========================================================
-   BACK BUTTON
-========================================================== */
-
-.tl-order-back-btn{
-
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-
-  padding:12px 22px;
-
-  border:none;
-  border-radius:16px;
-
-  cursor:pointer;
-
-  font-size:14px;
-  font-weight:800;
-
-  color:#fff;
-
-  background:linear-gradient(
-      135deg,
-      #ff6b6b,
-      #ff8e53
-  );
-
-  box-shadow:
-      0 15px 30px rgba(255,107,107,.25);
-
-  transition:.35s;
-}
-
-.tl-order-back-btn:hover{
-
-  transform:translateY(-4px);
-
-  box-shadow:
-      0 22px 40px rgba(255,107,107,.35);
-}
-
-/* ==========================================================
-   MAIN CARD
-========================================================== */
-
-.tl-order-card{
-
-  margin-top:22px;
-
-  padding:38px;
-
-  border-radius:34px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  background:rgba(255,255,255,.90);
-
-  backdrop-filter:blur(20px);
-
-  border:1px solid rgba(255,255,255,.7);
-
-  box-shadow:
-      0 25px 60px rgba(15,23,42,.08);
-}
-
-.tl-order-card::before{
-
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:6px;
-
-  background:linear-gradient(
-      90deg,
-      #ff6b6b,
-      #f59e0b,
-      #10b981,
-      #3b82f6,
-      #8b5cf6
-  );
-}
-
-.tl-order-card::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:220px;
-  height:220px;
-
-  border-radius:50%;
-
-  top:-80px;
-  right:-80px;
+  border: 1px solid var(--tl-border);
+  border-radius: 34px;
 
   background:
-      radial-gradient(circle,
-      rgba(59,130,246,.12),
-      transparent);
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.1),
+      transparent 32%
+    ),
+    rgba(255, 255, 255, 0.86);
 
-  pointer-events:none;
+  box-shadow:
+    0 30px 75px rgba(16, 42, 36, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+
+  backdrop-filter: blur(23px);
+  -webkit-backdrop-filter: blur(23px);
+
+  animation: tlOrderCardIn 0.8s 0.08s ease both;
+
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.45s ease;
 }
 
-/* ==========================================================
-   HEADER
-========================================================== */
+.tl-order-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
 
-.tl-order-header{
+  width: 76%;
+  height: 5px;
 
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  flex-wrap:wrap;
+  border-radius: 0 0 20px 20px;
 
-  margin-bottom:30px;
+  background: linear-gradient(
+    90deg,
+    var(--tl-primary),
+    var(--tl-secondary),
+    var(--tl-accent)
+  );
+
+  box-shadow: 0 6px 18px rgba(18, 184, 134, 0.28);
+
+  transform: translateX(-50%);
 }
 
-.tl-order-header h2{
+.tl-order-card::after {
+  content: "";
+  position: absolute;
+  top: -170px;
+  right: -160px;
 
-  margin:0;
+  width: 330px;
+  height: 330px;
 
-  font-size:34px;
+  border-radius: 50%;
 
-  font-weight:900;
+  background: radial-gradient(
+    circle,
+    rgba(56, 217, 169, 0.14),
+    transparent 68%
+  );
 
-  color:#0f172a;
+  pointer-events: none;
 }
 
-.tl-order-header p{
+.tl-order-card:hover {
+  border-color: rgba(8, 127, 91, 0.23);
 
-  margin-top:10px;
-
-  color:#64748b;
-
-  font-size:15px;
+  box-shadow:
+    0 38px 90px rgba(8, 127, 91, 0.14),
+    0 0 0 7px rgba(56, 217, 169, 0.035);
 }
 
-/* ==========================================================
+/* Loading and order-not-found card */
+
+.tl-order-card:only-child {
+  color: var(--tl-text);
+  font-size: 17px;
+  font-weight: 750;
+  text-align: center;
+}
+
+/* =========================================================
+   ORDER HEADER
+========================================================= */
+
+.tl-order-header {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 22px;
+
+  margin-bottom: 34px;
+  padding-bottom: 28px;
+
+  border-bottom: 1px solid rgba(8, 127, 91, 0.12);
+}
+
+.tl-order-header h2 {
+  margin: 0;
+
+  color: var(--tl-dark);
+  font-size: clamp(27px, 4vw, 38px);
+  font-weight: 950;
+  line-height: 1.2;
+  letter-spacing: -1.3px;
+}
+
+.tl-order-header h2::before {
+  content: "ORDER DETAILS";
+  display: block;
+  width: fit-content;
+
+  margin-bottom: 11px;
+  padding: 7px 13px;
+
+  color: var(--tl-primary);
+  font-size: 8.5px;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 2px;
+
+  border: 1px solid rgba(8, 127, 91, 0.14);
+  border-radius: 999px;
+
+  background: rgba(239, 255, 249, 0.86);
+}
+
+.tl-order-header p {
+  margin: 11px 0 0;
+
+  color: var(--tl-text);
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.7;
+}
+
+/* =========================================================
    STATUS BADGE
-========================================================== */
+========================================================= */
 
-.tl-order-status-badge{
+.tl-order-status-badge {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 
-  padding:12px 24px;
+  padding: 10px 19px;
 
-  border-radius:999px;
+  color: var(--tl-white);
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 
-  background:linear-gradient(
-      135deg,
-      #22c55e,
-      #16a34a
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    var(--tl-primary),
+    var(--tl-secondary)
   );
 
-  color:#fff;
+  box-shadow:
+    0 14px 30px rgba(8, 127, 91, 0.23),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 
-  font-size:14px;
+  animation: tlStatusPulse 3s ease-in-out infinite;
+}
 
-  font-weight:800;
+/* =========================================================
+   ORDER TIMELINE
+========================================================= */
 
-  letter-spacing:.4px;
+.tl-order-timeline {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+
+  margin-bottom: 38px;
+}
+
+.tl-order-step {
+  position: relative;
+  display: flex;
+  min-height: 74px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  padding: 15px;
+
+  color: var(--tl-muted);
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+
+  border: 1px solid rgba(8, 127, 91, 0.12);
+  border-radius: 17px;
+
+  background: rgba(247, 255, 252, 0.84);
 
   box-shadow:
-      0 15px 30px rgba(34,197,94,.25);
+    0 9px 22px rgba(16, 42, 36, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
-/* ==========================================================
-   TIMELINE
-========================================================== */
+.tl-order-step::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 11px;
 
-.tl-order-timeline{
+  width: 8px;
+  height: 8px;
 
-  display:grid;
+  border-radius: 50%;
 
-  grid-template-columns:repeat(4,1fr);
+  background: #bdcbc6;
 
-  gap:16px;
+  box-shadow: 0 0 0 4px rgba(189, 203, 198, 0.18);
 }
 
-.tl-order-step{
+.tl-order-step:hover {
+  transform: translateY(-4px);
 
-  padding:18px;
+  border-color: rgba(8, 127, 91, 0.25);
 
-  border-radius:18px;
-
-  text-align:center;
-
-  background:#f8fafc;
-
-  border:1px solid #e2e8f0;
-
-  color:#64748b;
-
-  font-size:14px;
-
-  font-weight:800;
-
-  transition:.35s;
+  box-shadow: 0 16px 32px rgba(8, 127, 91, 0.09);
 }
 
-.tl-order-step.active{
+.tl-order-step.active {
+  color: var(--tl-white);
 
-  background:linear-gradient(
-      135deg,
-      #22c55e,
-      #16a34a
+  border-color: transparent;
+
+  background: linear-gradient(
+    135deg,
+    var(--tl-primary),
+    var(--tl-secondary),
+    var(--tl-accent)
   );
 
-  border:none;
+  box-shadow:
+    0 17px 34px rgba(8, 127, 91, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.21);
 
-  color:#fff;
+  transform: translateY(-3px);
+}
 
-  transform:translateY(-3px);
+.tl-order-step.active::before {
+  background: var(--tl-white);
 
   box-shadow:
-      0 18px 30px rgba(34,197,94,.25);
+    0 0 0 4px rgba(255, 255, 255, 0.18),
+    0 0 18px rgba(255, 255, 255, 0.4);
 }
 
-/* ==========================================================
-   PRODUCTS
-========================================================== */
+/* =========================================================
+   PRODUCTS SECTION
+========================================================= */
 
-.tl-order-products{
+.tl-order-products {
+  position: relative;
+  z-index: 2;
 
-  margin-top:35px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
 
-  display:flex;
-  flex-direction:column;
-  gap:18px;
+  margin-top: 5px;
 }
 
-.tl-order-product-card{
+.tl-order-products::before {
+  content: "ORDERED PRODUCTS";
+  display: block;
+  width: fit-content;
 
-  display:flex;
-  gap:20px;
+  margin-bottom: 3px;
 
-  padding:18px;
-
-  border-radius:22px;
-
-  background:#fff;
-
-  border:1px solid #edf2f7;
-
-  transition:.35s;
+  color: var(--tl-primary);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.7px;
 }
 
-.tl-order-product-card:hover{
+.tl-order-product-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  gap: 21px;
 
-  transform:translateY(-5px);
+  padding: 18px;
+
+  border: 1px solid rgba(8, 127, 91, 0.12);
+  border-radius: 21px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.08),
+      transparent 40%
+    ),
+    rgba(255, 255, 255, 0.9);
 
   box-shadow:
-      0 20px 35px rgba(15,23,42,.08);
+    0 13px 30px rgba(16, 42, 36, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+
+  transition:
+    border-color 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
 }
 
-.tl-order-product-image{
+.tl-order-product-card::after {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -45%;
 
-  width:110px;
-  height:110px;
+  width: 20%;
+  height: 260%;
 
-  border-radius:18px;
+  pointer-events: none;
+  transform: rotate(24deg);
 
-  object-fit:cover;
-
-  border:1px solid #e5e7eb;
-
-  flex-shrink:0;
-}
-
-.tl-order-product-info{
-
-  flex:1;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.tl-order-product-info h3{
-
-  margin:0 0 10px;
-
-  font-size:20px;
-
-  font-weight:800;
-
-  color:#111827;
-}
-
-.tl-order-product-info p{
-
-  margin:4px 0;
-
-  font-size:15px;
-
-  color:#64748b;
-}
-
-/* ==========================================================
-   ADDRESS & PAYMENT
-========================================================== */
-
-.tl-order-info-grid{
-
-  margin-top:35px;
-
-  display:grid;
-
-  grid-template-columns:repeat(2,1fr);
-
-  gap:24px;
-}
-
-.tl-order-info-card{
-
-  padding:26px;
-
-  border-radius:24px;
-
-  background:linear-gradient(
-      135deg,
-      #ffffff,
-      #f8fafc
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
   );
 
-  border:1px solid #edf2f7;
-
-  transition:.35s;
+  transition: left 0.85s ease;
 }
 
-.tl-order-info-card:hover{
+.tl-order-product-card:hover {
+  transform: translateY(-6px);
 
-  transform:translateY(-4px);
+  border-color: rgba(8, 127, 91, 0.26);
 
   box-shadow:
-      0 18px 35px rgba(15,23,42,.08);
+    0 24px 48px rgba(8, 127, 91, 0.12),
+    0 0 0 5px rgba(56, 217, 169, 0.035);
 }
 
-.tl-order-info-card h3{
-
-  margin:0 0 18px;
-
-  font-size:22px;
-
-  font-weight:900;
-
-  color:#111827;
+.tl-order-product-card:hover::after {
+  left: 125%;
 }
 
-.tl-order-info-card p{
+/* =========================================================
+   PRODUCT IMAGE
+========================================================= */
 
-  margin:8px 0;
+.tl-order-product-image {
+  width: 112px;
+  height: 112px;
+  flex-shrink: 0;
 
-  font-size:15px;
+  padding: 5px;
 
-  color:#475569;
+  object-fit: cover;
 
-  line-height:1.8;
+  border: 1px solid rgba(8, 127, 91, 0.14);
+  border-radius: 18px;
+
+  background: var(--tl-white);
+
+  box-shadow: 0 12px 25px rgba(16, 42, 36, 0.09);
+
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.4s ease;
 }
 
-/* ==========================================================
-   EMPTY
-========================================================== */
+.tl-order-product-card:hover .tl-order-product-image {
+  transform: scale(1.05) rotate(-1deg);
 
-.tl-order-card:empty{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  min-height:250px;
-
-  font-size:18px;
-
-  color:#64748b;
-}
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
-
-@media (max-width: 992px) {
-
-  .tl-order-timeline {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+  box-shadow: 0 17px 35px rgba(8, 127, 91, 0.14);
 }
 
-@media (max-width: 768px) {
+/* =========================================================
+   PRODUCT INFO
+========================================================= */
 
-  .tl-order-card {
-    padding: 20px;
-    border-radius: 22px;
-  }
+.tl-order-product-info {
+  position: relative;
+  z-index: 2;
 
-  .tl-order-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .tl-order-header h2 {
-    font-size: 22px;
-  }
-
-  .tl-order-product-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .tl-order-product-image {
-    width: 100%;
-    max-width: 260px;
-    height: 220px;
-  }
-
-  .tl-order-product-info {
-    width: 100%;
-  }
-
-  .tl-order-info-grid {
-    grid-template-columns: 1fr;
-  }
-
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
 }
 
-@media (max-width: 480px) {
+.tl-order-product-info h3 {
+  margin: 0 0 10px;
 
-  .tl-order-page {
-    padding: 20px 12px 40px;
-  }
-
-  .tl-order-card {
-    padding: 16px;
-    border-radius: 18px;
-  }
-
-  .tl-order-header h2 {
-    font-size: 20px;
-  }
-
-  .tl-order-step {
-    font-size: 12px;
-    padding: 12px;
-  }
-
-  .tl-order-status-badge {
-    padding: 8px 14px;
-    font-size: 12px;
-  }
-
+  color: var(--tl-dark);
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: -0.35px;
 }
 
-/* ==========================================================
-   CANCEL ORDER MODAL
-========================================================== */
+.tl-order-product-info p {
+  margin: 3px 0;
+
+  color: var(--tl-text);
+  font-size: 13.5px;
+  font-weight: 550;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   ADDRESS AND PAYMENT GRID
+========================================================= */
+
+.tl-order-info-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+
+  margin-top: 36px;
+}
+
+.tl-order-info-card {
+  position: relative;
+  overflow: hidden;
+
+  padding: 27px;
+
+  border: 1px solid rgba(8, 127, 91, 0.12);
+  border-radius: 23px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.1),
+      transparent 42%
+    ),
+    rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    0 15px 35px rgba(16, 42, 36, 0.065),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+
+  transition:
+    border-color 0.35s ease,
+    transform 0.45s ease,
+    box-shadow 0.4s ease;
+}
+
+.tl-order-info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 5px;
+  height: 100%;
+
+  border-radius: 0 10px 10px 0;
+
+  background: linear-gradient(
+    180deg,
+    var(--tl-primary),
+    var(--tl-accent)
+  );
+}
+
+.tl-order-info-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(8, 127, 91, 0.24);
+
+  box-shadow:
+    0 25px 50px rgba(8, 127, 91, 0.12),
+    0 0 0 5px rgba(56, 217, 169, 0.035);
+}
+
+.tl-order-info-card h3 {
+  margin: 0 0 18px;
+
+  color: var(--tl-dark);
+  font-size: 20px;
+  font-weight: 950;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+}
+
+.tl-order-info-card h3::after {
+  content: "";
+  display: block;
+
+  width: 45px;
+  height: 3px;
+
+  margin-top: 10px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    var(--tl-primary),
+    var(--tl-accent)
+  );
+}
+
+.tl-order-info-card p {
+  margin: 7px 0;
+
+  color: var(--tl-text);
+  font-size: 13.5px;
+  font-weight: 550;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.tl-order-info-card p strong {
+  color: var(--tl-dark);
+  font-weight: 850;
+}
+
+/* =========================================================
+   CANCEL ORDER BUTTON
+========================================================= */
+
+.tl-order-cancel-btn {
+  position: relative;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  margin-top: 17px;
+  padding: 11px 21px;
+
+  color: var(--tl-white);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 13px;
+  outline: none;
+  cursor: pointer;
+
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626,
+    #b91c1c
+  );
+
+  background-size: 200% 200%;
+
+  box-shadow:
+    0 15px 30px rgba(220, 38, 38, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transition:
+    background-position 0.45s ease,
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    opacity 0.3s ease;
+}
+
+.tl-order-cancel-btn::before {
+  content: "";
+  position: absolute;
+  top: -70%;
+  left: -55%;
+
+  width: 34%;
+  height: 240%;
+
+  transform: rotate(24deg);
+
+  background: rgba(255, 255, 255, 0.28);
+
+  transition: left 0.7s ease;
+}
+
+.tl-order-cancel-btn:hover:not(:disabled) {
+  background-position: right center;
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 22px 42px rgba(220, 38, 38, 0.3),
+    0 0 0 5px rgba(239, 68, 68, 0.07);
+}
+
+.tl-order-cancel-btn:hover:not(:disabled)::before {
+  left: 130%;
+}
+
+.tl-order-cancel-btn:active:not(:disabled) {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.tl-order-cancel-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+/* =========================================================
+   CANCEL MODAL OVERLAY
+========================================================= */
 
 .tl-cancel-modal-overlay {
   position: fixed;
@@ -495,203 +849,638 @@
   z-index: 9999;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  padding: 20px;
+  overflow-y: auto;
+  padding: 24px;
 
-  background: rgba(15, 23, 42, .55);
-  backdrop-filter: blur(6px);
+  background: rgba(4, 31, 23, 0.68);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  animation: tlModalOverlayIn 0.25s ease both;
 }
+
+/* =========================================================
+   CANCEL MODAL
+========================================================= */
 
 .tl-cancel-modal {
+  position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 535px;
+  max-height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
 
-  background: #fff;
+  padding: 32px;
 
-  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 27px;
 
-  padding: 30px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.1),
+      transparent 36%
+    ),
+    rgba(255, 255, 255, 0.96);
 
-  box-shadow: 0 30px 70px rgba(15, 23, 42, .25);
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
 
-  animation: tlPopup .25s ease;
+  animation: tlCancelModalIn 0.35s ease both;
 }
 
-@keyframes tlPopup {
+.tl-cancel-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
 
-  from {
-    opacity: 0;
-    transform: scale(.92);
-  }
+  width: 68%;
+  height: 5px;
 
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  border-radius: 0 0 20px 20px;
 
+  background: linear-gradient(
+    90deg,
+    var(--tl-primary),
+    var(--tl-secondary),
+    var(--tl-accent)
+  );
+
+  transform: translateX(-50%);
 }
 
 .tl-cancel-modal h2 {
   margin: 0;
 
-  color: #0f172a;
-
-  font-size: 24px;
-
-  font-weight: 800;
+  color: var(--tl-dark);
+  font-size: 27px;
+  font-weight: 950;
+  line-height: 1.25;
+  letter-spacing: -0.8px;
 }
 
-.tl-cancel-modal p {
-  margin: 10px 0 24px;
+.tl-cancel-modal h2::after {
+  content: "";
+  display: block;
 
-  color: #64748b;
+  width: 48px;
+  height: 4px;
 
+  margin-top: 11px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    var(--tl-primary),
+    var(--tl-accent)
+  );
+}
+
+.tl-cancel-modal > p {
+  margin: 13px 0 23px;
+
+  color: var(--tl-text);
+  font-size: 13.5px;
+  font-weight: 500;
   line-height: 1.7;
 }
+
+/* =========================================================
+   CANCELLATION OPTIONS
+========================================================= */
 
 .tl-cancel-options {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 11px;
 }
 
 .tl-cancel-options label {
   display: flex;
+  min-height: 52px;
   align-items: center;
   gap: 12px;
 
-  padding: 15px 18px;
+  padding: 13px 15px;
 
-  border: 1px solid #e2e8f0;
+  color: var(--tl-dark);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
 
+  border: 1px solid rgba(8, 127, 91, 0.12);
   border-radius: 14px;
 
   cursor: pointer;
 
-  font-size: 15px;
+  background: rgba(247, 255, 252, 0.8);
 
-  font-weight: 600;
-
-  color: #334155;
-
-  transition: .25s ease;
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .tl-cancel-options label:hover {
-  background: #eff6ff;
-  border-color: #2563eb;
+  color: var(--tl-primary);
+
+  border-color: rgba(8, 127, 91, 0.3);
+
+  background: rgba(239, 255, 249, 0.95);
+
+  transform: translateX(4px);
+
+  box-shadow: 0 10px 22px rgba(8, 127, 91, 0.08);
+}
+
+.tl-cancel-options label:has(input:checked) {
+  color: var(--tl-primary);
+
+  border-color: var(--tl-secondary);
+
+  background: rgba(56, 217, 169, 0.12);
+
+  box-shadow: 0 0 0 4px rgba(56, 217, 169, 0.07);
 }
 
 .tl-cancel-options input[type="radio"] {
   width: 18px;
   height: 18px;
+  flex-shrink: 0;
 
-  accent-color: #2563eb;
+  cursor: pointer;
+  accent-color: var(--tl-primary);
 }
+
+/* =========================================================
+   CANCEL TEXTAREA
+========================================================= */
 
 .tl-cancel-textarea {
   width: 100%;
-
-  min-height: 110px;
-
-  margin-top: 18px;
-
-  padding: 14px;
-
+  min-height: 115px;
   resize: vertical;
 
-  border: 1px solid #d1d5db;
+  margin-top: 16px;
+  padding: 14px 15px;
 
+  color: var(--tl-dark);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 550;
+  line-height: 1.6;
+
+  border: 1px solid rgba(8, 127, 91, 0.15);
   border-radius: 14px;
-
   outline: none;
 
-  font-size: 15px;
+  background: rgba(255, 255, 255, 0.92);
 
-  transition: .25s ease;
+  box-shadow:
+    0 8px 20px rgba(16, 42, 36, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.tl-cancel-textarea::placeholder {
+  color: #92a59e;
+}
+
+.tl-cancel-textarea:hover {
+  border-color: rgba(8, 127, 91, 0.28);
 }
 
 .tl-cancel-textarea:focus {
-  border-color: #2563eb;
+  border-color: var(--tl-secondary);
 
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, .15);
+  background: var(--tl-white);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 0 4px rgba(18, 184, 134, 0.11),
+    0 13px 28px rgba(8, 127, 91, 0.09);
 }
+
+/* =========================================================
+   MODAL BUTTONS
+========================================================= */
 
 .tl-cancel-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
 
-  margin-top: 26px;
+  margin-top: 24px;
 }
 
 .tl-cancel-close-btn {
-  border: none;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
 
-  padding: 12px 22px;
+  padding: 11px 21px;
 
-  border-radius: 12px;
+  color: var(--tl-primary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
 
-  background: #e2e8f0;
-
-  color: #334155;
-
-  font-weight: 700;
-
+  border: 1px solid rgba(8, 127, 91, 0.15);
+  border-radius: 13px;
+  outline: none;
   cursor: pointer;
 
-  transition: .25s ease;
+  background: var(--tl-light);
+
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .tl-cancel-close-btn:hover {
-  background: #cbd5e1;
+  color: var(--tl-white);
+
+  border-color: transparent;
+
+  background: linear-gradient(
+    135deg,
+    var(--tl-primary),
+    var(--tl-secondary)
+  );
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 15px 30px rgba(8, 127, 91, 0.2);
 }
 
-.tl-order-cancel-btn {
-  border: none;
+/* Remove extra margin inside modal */
 
-  padding: 12px 22px;
-
-  border-radius: 12px;
-
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-
-  color: #fff;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: .25s ease;
+.tl-cancel-buttons .tl-order-cancel-btn {
+  margin-top: 0;
 }
 
-.tl-order-cancel-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
+/* =========================================================
+   ANIMATIONS
+========================================================= */
 
-  box-shadow: 0 10px 25px rgba(239, 68, 68, .30);
+@keyframes tlOrderBackIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.tl-order-cancel-btn:disabled {
-  opacity: .6;
-  cursor: not-allowed;
+@keyframes tlOrderCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-@media (max-width: 600px) {
+@keyframes tlStatusPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 14px 30px rgba(8, 127, 91, 0.23),
+      0 0 0 0 rgba(56, 217, 169, 0.15);
+  }
 
-  .tl-cancel-modal {
-    padding: 22px;
+  50% {
+    box-shadow:
+      0 14px 30px rgba(8, 127, 91, 0.23),
+      0 0 0 8px rgba(56, 217, 169, 0);
+  }
+}
+
+@keyframes tlModalOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tlCancelModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tlOrderShapeOne {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(40px, 28px, 0) scale(1.08);
+  }
+}
+
+@keyframes tlOrderShapeTwo {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-34px, -25px, 0) scale(1.1);
+  }
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1050px) {
+  .tl-order-card {
+    padding: 34px;
+  }
+
+  .tl-order-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .tl-order-page {
+    padding: 55px 16px 105px;
+  }
+
+  .tl-order-card {
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 27px;
+  }
+
+  .tl-order-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-bottom: 27px;
+    padding-bottom: 23px;
+  }
+
+  .tl-order-header h2 {
+    font-size: 27px;
+  }
+
+  .tl-order-timeline {
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .tl-order-step {
+    min-height: 65px;
+    padding: 13px;
+    border-radius: 15px;
+  }
+
+  .tl-order-product-card {
+    align-items: flex-start;
+  }
+
+  .tl-order-info-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .tl-order-info-card {
+    padding: 23px;
+    border-radius: 20px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 550px) {
+  .tl-order-page {
+    padding: 38px 12px 95px;
+  }
+
+  .tl-order-back-btn {
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+
+  .tl-order-card {
+    padding: 19px;
+    border-radius: 22px;
+  }
+
+  .tl-order-header {
+    gap: 15px;
+    margin-bottom: 23px;
+    padding-bottom: 20px;
+  }
+
+  .tl-order-header h2 {
+    font-size: 23px;
+    letter-spacing: -0.7px;
+  }
+
+  .tl-order-header h2::before {
+    padding: 6px 10px;
+    font-size: 7.5px;
+    letter-spacing: 1.6px;
+  }
+
+  .tl-order-header p {
+    font-size: 12.5px;
+  }
+
+  .tl-order-status-badge {
+    min-height: 39px;
+    padding: 9px 15px;
+    font-size: 10px;
+  }
+
+  .tl-order-timeline {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .tl-order-step {
+    min-height: 54px;
+    justify-content: flex-start;
+    padding: 12px 16px 12px 41px;
+    text-align: left;
+  }
+
+  .tl-order-step::before {
+    top: 50%;
+    left: 17px;
+    transform: translateY(-50%);
+  }
+
+  .tl-order-product-card {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 15px;
+    text-align: center;
     border-radius: 18px;
   }
 
-  .tl-cancel-buttons {
-    flex-direction: column;
+  .tl-order-product-image {
+    width: 100%;
+    height: 215px;
+    border-radius: 16px;
   }
 
-  .tl-cancel-close-btn,
+  .tl-order-product-info {
+    width: 100%;
+    align-items: center;
+  }
+
+  .tl-order-product-info h3 {
+    font-size: 17px;
+  }
+
+  .tl-order-product-info p {
+    font-size: 12.5px;
+  }
+
+  .tl-order-info-grid {
+    margin-top: 28px;
+  }
+
+  .tl-order-info-card {
+    padding: 19px;
+    border-radius: 18px;
+  }
+
+  .tl-order-info-card h3 {
+    font-size: 18px;
+  }
+
+  .tl-order-info-card p {
+    font-size: 12.5px;
+  }
+
   .tl-order-cancel-btn {
     width: 100%;
   }
 
+  .tl-cancel-modal-overlay {
+    align-items: flex-end;
+    padding: 12px;
+  }
+
+  .tl-cancel-modal {
+    max-height: calc(100vh - 24px);
+    padding: 24px 18px 20px;
+    border-radius: 23px 23px 16px 16px;
+  }
+
+  .tl-cancel-modal h2 {
+    font-size: 23px;
+  }
+
+  .tl-cancel-modal > p {
+    margin-bottom: 19px;
+    font-size: 12.5px;
+  }
+
+  .tl-cancel-options {
+    gap: 9px;
+  }
+
+  .tl-cancel-options label {
+    min-height: 49px;
+    padding: 11px 13px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+
+  .tl-cancel-textarea {
+    min-height: 100px;
+    font-size: 12.5px;
+  }
+
+  .tl-cancel-buttons {
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .tl-cancel-close-btn,
+  .tl-cancel-buttons .tl-order-cancel-btn {
+    width: 100%;
+    min-height: 47px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.tl-order-back-btn:focus-visible,
+.tl-order-cancel-btn:focus-visible,
+.tl-cancel-close-btn:focus-visible,
+.tl-cancel-textarea:focus-visible,
+.tl-cancel-options input:focus-visible {
+  outline: 3px solid rgba(56, 217, 169, 0.5);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-order-page,
+  .tl-order-page *,
+  .tl-order-page *::before,
+  .tl-order-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,106 +1,816 @@
-.success-page{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f8fafc;
-    padding:20px;
+/* =========================================================
+   TOYLAND PREMIUM SUCCESS PAGE
+========================================================= */
+
+.success-page {
+  --success-primary: #087f5b;
+  --success-secondary: #12b886;
+  --success-accent: #38d9a9;
+  --success-dark: #102a24;
+  --success-text: #536b64;
+  --success-white: #ffffff;
+  --success-light: #effff9;
+  --success-border: rgba(8, 127, 91, 0.14);
+
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+
+  padding: 50px 20px;
+
+  font-family:
+    "Plus Jakarta Sans",
+    "Poppins",
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(56, 217, 169, 0.22),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(18, 184, 134, 0.16),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 70% 90%,
+      rgba(8, 127, 91, 0.1),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #effff9 0%,
+      #ffffff 48%,
+      #f3fffb 100%
+    );
 }
 
-.success-card{
-    width:100%;
-    max-width:550px;
-    background:#fff;
-    border-radius:24px;
-    padding:50px;
-    text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,.08);
-    animation:popup .4s ease;
+.success-page::before,
+.success-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+
+  border-radius: 50%;
+
+  pointer-events: none;
 }
 
-.success-icon{
-    width:120px;
-    height:120px;
-    margin:auto;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:60px;
-    background:#ecfdf5;
+.success-page::before {
+  top: -180px;
+  left: -150px;
+
+  width: 420px;
+  height: 420px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(56, 217, 169, 0.28),
+    rgba(18, 184, 134, 0.03)
+  );
+
+  animation:
+    successShapeOne
+    12s ease-in-out infinite;
 }
 
-.success-card h1{
-    margin-top:25px;
-    color:#0f172a;
-    font-size:32px;
-    font-weight:800;
+.success-page::after {
+  right: -160px;
+  bottom: -190px;
+
+  width: 390px;
+  height: 390px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(8, 127, 91, 0.18),
+    rgba(56, 217, 169, 0.03)
+  );
+
+  animation:
+    successShapeTwo
+    14s ease-in-out infinite;
 }
 
-.success-card p{
-    margin-top:18px;
-    color:#64748b;
-    line-height:1.8;
-    font-size:16px;
+/* =========================================================
+   SUCCESS CARD
+========================================================= */
+
+.success-card {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 580px;
+  overflow: hidden;
+
+  padding: 52px 48px;
+
+  text-align: center;
+
+  border:
+    1px solid
+    var(--success-border);
+
+  border-radius: 34px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.12),
+      transparent 36%
+    ),
+    rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    0 35px 85px
+    rgba(16, 42, 36, 0.14),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.97);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter:
+    blur(24px);
+
+  animation:
+    successCardPopup
+    0.65s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+
+  transition:
+    border-color 0.4s ease,
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
 }
 
-.success-buttons{
-    display:flex;
-    gap:15px;
-    margin-top:35px;
+.success-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 74%;
+  height: 5px;
+
+  border-radius:
+    0 0 20px 20px;
+
+  background: linear-gradient(
+    90deg,
+    var(--success-primary),
+    var(--success-secondary),
+    var(--success-accent)
+  );
+
+  box-shadow:
+    0 6px 18px
+    rgba(18, 184, 134, 0.28);
+
+  transform: translateX(-50%);
 }
+
+.success-card::after {
+  content: "";
+
+  position: absolute;
+  top: -150px;
+  right: -150px;
+
+  width: 310px;
+  height: 310px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(56, 217, 169, 0.14),
+    transparent 68%
+  );
+
+  pointer-events: none;
+}
+
+.success-card:hover {
+  border-color:
+    rgba(8, 127, 91, 0.24);
+
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 45px 100px
+    rgba(8, 127, 91, 0.18),
+    0 0 0 8px
+    rgba(56, 217, 169, 0.04);
+}
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+.success-icon {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  width: 124px;
+  height: 124px;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+
+  font-size: 56px;
+  line-height: 1;
+
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.14);
+
+  border-radius: 35px;
+
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      rgba(255, 255, 255, 0.95),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #effff9,
+      #d9fff1
+    );
+
+  box-shadow:
+    0 22px 48px
+    rgba(8, 127, 91, 0.16),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.95);
+
+  animation:
+    successIconFloat
+    3.5s ease-in-out infinite;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.success-icon::before {
+  content: "";
+
+  position: absolute;
+  inset: -10px;
+  z-index: -1;
+
+  border:
+    1px solid
+    rgba(56, 217, 169, 0.24);
+
+  border-radius: 42px;
+
+  animation:
+    successIconPulse
+    2.8s ease-in-out infinite;
+}
+
+.success-icon::after {
+  content: "";
+
+  position: absolute;
+  top: 11px;
+  left: 18px;
+
+  width: 32px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  transform: rotate(-28deg);
+}
+
+.success-card:hover .success-icon {
+  transform:
+    translateY(-5px)
+    rotate(-3deg);
+
+  box-shadow:
+    0 30px 58px
+    rgba(8, 127, 91, 0.21);
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.success-card h1 {
+  position: relative;
+  z-index: 2;
+
+  margin: 31px 0 0;
+
+  color: var(--success-dark);
+
+  font-size: clamp(
+    28px,
+    5vw,
+    38px
+  );
+
+  font-weight: 950;
+  line-height: 1.2;
+  letter-spacing: -1.3px;
+}
+
+.success-card h1::after {
+  content: "";
+
+  display: block;
+
+  width: 62px;
+  height: 4px;
+
+  margin: 16px auto 0;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    var(--success-primary),
+    var(--success-accent)
+  );
+
+  box-shadow:
+    0 5px 15px
+    rgba(18, 184, 134, 0.27);
+}
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.success-card p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 440px;
+
+  margin: 20px auto 0;
+
+  color: var(--success-text);
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.85;
+}
+
+/* =========================================================
+   BUTTON CONTAINER
+========================================================= */
+
+.success-buttons {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 36px;
+  padding-top: 30px;
+
+  border-top:
+    1px solid
+    rgba(8, 127, 91, 0.11);
+}
+
+/* =========================================================
+   COMMON BUTTON STYLE
+========================================================= */
 
 .success-primary,
-.success-secondary{
-    flex:1;
-    height:52px;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:700;
+.success-secondary {
+  position: relative;
+
+  display: inline-flex;
+  min-width: 0;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  padding: 13px 19px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1;
+
+  border-radius: 15px;
+  outline: none;
+  cursor: pointer;
+
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.4s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+    box-shadow 0.4s ease;
 }
 
-.success-primary{
-    background:#2563eb;
-    color:white;
+.success-primary::before,
+.success-secondary::before {
+  content: "";
+
+  position: absolute;
+  top: -75%;
+  left: -55%;
+
+  width: 34%;
+  height: 250%;
+
+  pointer-events: none;
+
+  transform: rotate(24deg);
+
+  background:
+    rgba(255, 255, 255, 0.3);
+
+  transition: left 0.7s ease;
 }
 
-.success-primary:hover{
-    background:#1d4ed8;
+.success-primary:hover::before,
+.success-secondary:hover::before {
+  left: 130%;
 }
 
-.success-secondary{
-    background:#eef2ff;
-    color:#2563eb;
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.success-primary {
+  color: var(--success-white);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.22);
+
+  background: linear-gradient(
+    135deg,
+    var(--success-primary),
+    var(--success-secondary),
+    var(--success-accent)
+  );
+
+  background-size: 200% 200%;
+
+  box-shadow:
+    0 17px 35px
+    rgba(8, 127, 91, 0.26),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.22);
 }
 
-.success-secondary:hover{
-    background:#dbeafe;
+.success-primary:hover {
+  background-position:
+    right center;
+
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 25px 48px
+    rgba(8, 127, 91, 0.34),
+    0 0 0 5px
+    rgba(56, 217, 169, 0.07);
 }
 
-@keyframes popup{
-
-from{
-opacity:0;
-transform:scale(.9);
+.success-primary:active {
+  transform:
+    translateY(-1px)
+    scale(0.98);
 }
 
-to{
-opacity:1;
-transform:scale(1);
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.success-secondary {
+  color: var(--success-primary);
+
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.16);
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  box-shadow:
+    0 12px 27px
+    rgba(16, 42, 36, 0.07),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.96);
 }
 
+.success-secondary:hover {
+  color: var(--success-white);
+
+  border-color: transparent;
+
+  background: linear-gradient(
+    135deg,
+    var(--success-primary),
+    var(--success-secondary)
+  );
+
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 22px 40px
+    rgba(8, 127, 91, 0.24),
+    0 0 0 5px
+    rgba(56, 217, 169, 0.06);
 }
 
-@media(max-width:600px){
-
-.success-card{
-padding:30px 20px;
+.success-secondary:active {
+  transform:
+    translateY(-1px)
+    scale(0.98);
 }
 
-.success-buttons{
-flex-direction:column;
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes successCardPopup {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px)
+      scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
 }
 
+@keyframes successIconFloat {
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(0);
+  }
+
+  50% {
+    transform:
+      translateY(-8px)
+      rotate(3deg);
+  }
+}
+
+@keyframes successIconPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0;
+
+    transform: scale(1.16);
+  }
+}
+
+@keyframes successShapeOne {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        40px,
+        28px,
+        0
+      )
+      scale(1.08);
+  }
+}
+
+@keyframes successShapeTwo {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        -34px,
+        -25px,
+        0
+      )
+      scale(1.1);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .success-page {
+    padding: 40px 18px;
+  }
+
+  .success-card {
+    max-width: 540px;
+    padding: 43px 35px;
+    border-radius: 29px;
+  }
+
+  .success-icon {
+    width: 110px;
+    height: 110px;
+
+    font-size: 50px;
+    border-radius: 31px;
+  }
+
+  .success-card h1 {
+    font-size: 31px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .success-page {
+    align-items: center;
+
+    padding: 30px 12px 95px;
+  }
+
+  .success-card {
+    padding: 35px 19px 24px;
+
+    border-radius: 24px;
+  }
+
+  .success-icon {
+    width: 92px;
+    height: 92px;
+
+    font-size: 42px;
+    border-radius: 26px;
+  }
+
+  .success-icon::before {
+    inset: -7px;
+    border-radius: 31px;
+  }
+
+  .success-icon::after {
+    top: 9px;
+    left: 13px;
+
+    width: 27px;
+    height: 13px;
+  }
+
+  .success-card h1 {
+    margin-top: 27px;
+
+    font-size: 27px;
+    letter-spacing: -0.8px;
+  }
+
+  .success-card h1::after {
+    width: 52px;
+    height: 3px;
+
+    margin-top: 13px;
+  }
+
+  .success-card p {
+    margin-top: 17px;
+
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .success-buttons {
+    grid-template-columns: 1fr;
+
+    gap: 11px;
+
+    margin-top: 27px;
+    padding-top: 24px;
+  }
+
+  .success-primary,
+  .success-secondary {
+    width: 100%;
+    min-height: 50px;
+
+    padding: 12px 17px;
+
+    font-size: 12.5px;
+    border-radius: 13px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .success-card {
+    padding:
+      30px 15px 20px;
+  }
+
+  .success-card h1 {
+    font-size: 24px;
+  }
+
+  .success-card p {
+    font-size: 12.5px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.success-primary:focus-visible,
+.success-secondary:focus-visible {
+  outline:
+    3px solid
+    rgba(56, 217, 169, 0.5);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .success-page,
+  .success-page *,
+  .success-page *::before,
+  .success-page *::after {
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
 }

@@ -1,77 +1,597 @@
-/* ToyLand global styles - no Tailwind CSS used */
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
+/* =========================================================
+   TOYLAND GLOBAL APP STYLES
+========================================================= */
+
+@import url(
+  "https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+);
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  width: 100%;
   min-height: 100vh;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #0f172a;
-  background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 34rem),
-    radial-gradient(circle at top right, rgba(244, 114, 182, 0.12), transparent 32rem), #f8fbff;
+  overflow-x: hidden;
+
+  color: #102a24;
+
+  font-family:
+    "Nunito",
+    "Poppins",
+    "Segoe UI",
+    sans-serif;
+
+  background: #f7fffc;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-a { color: inherit; text-decoration: none; }
-button, input, select, textarea { font: inherit; }
-button { border: 0; cursor: pointer; }
-img { max-width: 100%; display: block; }
-.container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
-.page-section { padding: 56px 0 80px; }
-.page-title { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; color: #172554; }
-.page-subtitle { margin: 0; color: #64748b; }
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
+
+:root {
+  --toy-primary: #087f5b;
+  --toy-primary-dark: #056648;
+  --toy-secondary: #12b886;
+  --toy-accent: #38d9a9;
+
+  --toy-dark: #102a24;
+  --toy-text: #536b64;
+  --toy-muted: #8a9c96;
+
+  --toy-white: #ffffff;
+  --toy-bg: #f7fffc;
+  --toy-light: #effff9;
+
+  --toy-border: rgba(8, 127, 91, 0.14);
+
+  --toy-success: #16a34a;
+  --toy-warning: #f59e0b;
+  --toy-danger: #dc2626;
+  --toy-info: #0284c7;
+
+  --toy-radius-sm: 10px;
+  --toy-radius-md: 16px;
+  --toy-radius-lg: 24px;
+  --toy-radius-xl: 32px;
+
+  --toy-shadow-sm:
+    0 8px 20px rgba(16, 42, 36, 0.06);
+
+  --toy-shadow-md:
+    0 18px 42px rgba(16, 42, 36, 0.09);
+
+  --toy-shadow-lg:
+    0 30px 75px rgba(16, 42, 36, 0.13);
+
+  --toy-transition:
+    0.35s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+/* =========================================================
+   GLOBAL ELEMENTS
+========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: none;
+}
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  color: var(--toy-dark);
+
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.14);
+
+  outline: none;
+
+  background: var(--toy-white);
+
+  transition:
+    border-color var(--toy-transition),
+    box-shadow var(--toy-transition),
+    background var(--toy-transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--toy-primary);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(56, 217, 169, 0.12);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* =========================================================
+   COMMON PAGE SECTION
+========================================================= */
+
+.page-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 80px 18px 110px;
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(56, 217, 169, 0.16),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 94% 18%,
+      rgba(18, 184, 134, 0.12),
+      transparent 26%
+    ),
+    linear-gradient(
+      145deg,
+      #effff9 0%,
+      #ffffff 48%,
+      #f3fffb 100%
+    );
+}
+
+/* =========================================================
+   COMMON CONTAINER
+========================================================= */
+
+.container {
+  width: 100%;
+  max-width: 1220px;
+
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+/* =========================================================
+   COMMON PAGE TITLE
+========================================================= */
+
+.page-title {
+  margin: 0;
+
+  color: var(--toy-dark);
+
+  font-size: clamp(
+    34px,
+    5vw,
+    52px
+  );
+
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1.8px;
+}
+
+.page-title::after {
+  content: "";
+
+  display: block;
+
+  width: 65px;
+  height: 4px;
+
+  margin-top: 15px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    var(--toy-primary),
+    var(--toy-accent)
+  );
+
+  box-shadow:
+    0 5px 15px
+    rgba(18, 184, 134, 0.25);
+}
+
+.page-subtitle {
+  max-width: 600px;
+
+  margin: 16px 0 0;
+
+  color: var(--toy-text);
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   COMMON CARD
+========================================================= */
+
+.card {
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.12);
+
+  border-radius: var(--toy-radius-lg);
+
+  background:
+    rgba(255, 255, 255, 0.9);
+
+  box-shadow: var(--toy-shadow-md);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* =========================================================
+   COMMON EMPTY STATE
+========================================================= */
+
+.empty-state {
+  display: flex;
+  min-height: 280px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 35px;
+
+  color: var(--toy-text);
+
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* =========================================================
+   COMMON PRIMARY BUTTON
+========================================================= */
+
 .btn-primary {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  border-radius: 999px; background: linear-gradient(135deg, #2563eb, #1e40af);
-  padding: 13px 22px; font-weight: 900; color: #fff; box-shadow: 0 16px 30px rgba(37,99,235,.24); transition: .25s ease;
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 24px;
+
+  color: var(--toy-white);
+
+  font-size: 14px;
+  font-weight: 800;
+
+  border-radius: 14px;
+  cursor: pointer;
+
+  background: linear-gradient(
+    135deg,
+    var(--toy-primary),
+    var(--toy-secondary),
+    var(--toy-accent)
+  );
+
+  box-shadow:
+    0 15px 32px
+    rgba(8, 127, 91, 0.24);
+
+  transition:
+    transform var(--toy-transition),
+    box-shadow var(--toy-transition);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 22px 42px rgba(37,99,235,.32); }
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 22px 42px
+    rgba(8, 127, 91, 0.32);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* =========================================================
+   COMMON SOFT BUTTON
+========================================================= */
+
 .btn-soft {
-  display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  border-radius: 999px; background: #eff6ff; padding: 12px 18px; font-weight: 900; color: #1d4ed8; transition: .25s ease;
-}
-.btn-soft:hover { background: #dbeafe; transform: translateY(-2px); }
-.btn-danger { border-radius:999px; background:#fee2e2; color:#dc2626; padding:12px 18px; font-weight:900; }
-.input {
-  width: 100%; border-radius: 16px; border: 1px solid #dbeafe; background: rgba(255,255,255,.94);
-  padding: 14px 16px; color: #0f172a; outline: none; transition: .22s ease;
-}
-.input:focus { border-color: #2563eb; box-shadow: 0 0 0 4px rgba(37, 99, 235, .12); }
-.card { border: 1px solid #dbeafe; background:#fff; border-radius: 28px; box-shadow: 0 18px 45px rgba(30,64,175,.08); }
-.hero-panel { border-radius: 34px; background: linear-gradient(135deg,#1d4ed8,#172554 72%,#db2777); color:#fff; }
-.grid-2 { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:24px; }
-.grid-3 { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:24px; }
-.grid-4 { display:grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap:20px; }
-.empty-state { padding:40px; text-align:center; color:#64748b; }
-.table-wrap { overflow:auto; border-radius: 24px; background:#fff; box-shadow:0 16px 40px rgba(30,64,175,.08); }
-table { width:100%; border-collapse: collapse; min-width:760px; }
-th { text-align:left; background:#dbeafe; color:#172554; padding:16px; }
-td { border-top:1px solid #eff6ff; padding:16px; color:#334155; }
-.toyland-loader{
-    min-height:320px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:18px;
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 24px;
+
+  color: var(--toy-primary);
+
+  font-size: 14px;
+  font-weight: 800;
+
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.16);
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  background: var(--toy-white);
+
+  box-shadow: var(--toy-shadow-sm);
+
+  transition:
+    color var(--toy-transition),
+    background var(--toy-transition),
+    transform var(--toy-transition),
+    box-shadow var(--toy-transition);
 }
 
-.toy-spinner{
-    width:70px;
-    height:70px;
-    border:6px solid #e2e8f0;
-    border-top:6px solid #2563eb;
-    border-radius:50%;
-    animation:toySpin 0.9s linear infinite;
+.btn-soft:hover {
+  color: var(--toy-white);
+
+  background: linear-gradient(
+    135deg,
+    var(--toy-primary),
+    var(--toy-secondary)
+  );
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 20px 38px
+    rgba(8, 127, 91, 0.22);
 }
 
-.toyland-loader h3{
-    color:#2563eb;
-    font-size:20px;
-    font-weight:700;
+/* =========================================================
+   COMMON LOADER
+========================================================= */
+
+.global-loader {
+  display: flex;
+  min-height: 320px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
-@keyframes toySpin{
-    100%{
-        transform:rotate(360deg);
-    }
+.global-spinner {
+  width: 60px;
+  height: 60px;
+
+  border:
+    5px solid
+    rgba(8, 127, 91, 0.12);
+
+  border-top-color:
+    var(--toy-primary);
+
+  border-right-color:
+    var(--toy-accent);
+
+  border-radius: 50%;
+
+  animation:
+    globalSpin
+    0.85s linear infinite;
 }
-@media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); } .grid-3, .grid-2 { grid-template-columns: 1fr; } .page-section { padding-bottom: 96px; } }
-@media (max-width: 560px) { .container { width: min(100% - 22px, 1180px); } .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); gap:12px; } .card { border-radius:20px; } }
+
+@keyframes globalSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #effff9;
+}
+
+::-webkit-scrollbar-thumb {
+  border:
+    2px solid #effff9;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    180deg,
+    var(--toy-primary),
+    var(--toy-accent)
+  );
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--toy-primary-dark);
+}
+
+/* =========================================================
+   TEXT SELECTION
+========================================================= */
+
+::selection {
+  color: var(--toy-white);
+
+  background:
+    var(--toy-primary);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .page-section {
+    padding:
+      65px 16px 105px;
+  }
+
+  .container {
+    padding: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    scroll-padding-top: 75px;
+  }
+
+  .page-section {
+    padding:
+      48px 12px 95px;
+  }
+
+  .page-title {
+    font-size: 32px;
+    letter-spacing: -1.1px;
+  }
+
+  .page-title::after {
+    width: 52px;
+    height: 3px;
+
+    margin-top: 12px;
+  }
+
+  .page-subtitle {
+    margin-top: 13px;
+
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  .card {
+    border-radius:
+      var(--toy-radius-md);
+  }
+
+  .btn-primary,
+  .btn-soft {
+    min-height: 48px;
+
+    padding: 11px 18px;
+
+    font-size: 13px;
+    border-radius: 13px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline:
+    3px solid
+    rgba(56, 217, 169, 0.5);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+}

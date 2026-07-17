@@ -139,9 +139,9 @@ loadAddresses();
   };
 
   return (
-    <section className="page-section">
+    <section className="address-page">
       <div className="container">
-        <h1 className="page-title">
+        <h1 className="address-page-title">
           Manage Addresses
         </h1>
 

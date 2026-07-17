@@ -28,6 +28,11 @@ export default function ProductCard({ p }) {
       className="toy-product-image"
       loading="lazy"
     />
+    <div className="toy-product-description-overlay">
+  <p>
+    {p.description || "Explore this exciting ToyLand product designed for fun, learning and creative play."}
+  </p>
+</div>
 
     {discount > 0 && (
       <span className="toy-discount-badge">

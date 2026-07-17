@@ -91,7 +91,7 @@ type:"wishlist"
   };
 
   return (
-    <section className="page-section">
+    <section className="toy-product-details-page">
       <div className="container details-grid">
 
         <div className="card details-image-card">

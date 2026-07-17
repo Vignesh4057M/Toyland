@@ -204,16 +204,16 @@ export default function Checkout() {
 };
 
   return (
-  <section className="page-section">
+  <section className="toy-checkout-page">
     <div className="container">
-      <h1 className="page-title">Checkout</h1>
+      <h1 className="toy-checkout-title">Checkout</h1>
 
       <div
         className="checkout-layout"
         style={{ marginTop: 24 }}
       >
-        <form
-  className="card checkout-form toy-checkout-form"
+ <form
+  className="toy-checkout-form"
   onSubmit={placeOrder}
 >
           <h2>Shipping Details</h2>
@@ -221,7 +221,7 @@ export default function Checkout() {
           <div className="checkout-grid">
 
             <input
-              className="input"
+  className="toy-checkout-input"
               name="fullName"
               value={address.fullName}
               onChange={handleChange}
@@ -230,7 +230,7 @@ export default function Checkout() {
             />
 
             <input
-              className="input"
+  className="toy-checkout-input"
               name="phone"
               value={address.phone}
               onChange={handleChange}
@@ -239,7 +239,7 @@ export default function Checkout() {
             />
 
             <textarea
-              className="input"
+             className="toy-checkout-input"
               name="address"
               value={address.address}
               onChange={handleChange}
@@ -248,7 +248,7 @@ export default function Checkout() {
             />
 
             <input
-              className="input"
+  className="toy-checkout-input"
               name="city"
               value={address.city}
               onChange={handleChange}
@@ -257,7 +257,7 @@ export default function Checkout() {
             />
 
             <input
-              className="input"
+  className="toy-checkout-input"
               name="district"
               value={address.district}
               onChange={handleChange}
@@ -265,7 +265,7 @@ export default function Checkout() {
             />
 
             <input
-              className="input"
+  className="toy-checkout-input"
               name="state"
               value={address.state}
               onChange={handleChange}
@@ -273,7 +273,7 @@ export default function Checkout() {
             />
 
             <input
-              className="input"
+  className="toy-checkout-input"
               name="pincode"
               value={address.pincode}
               onChange={handleChange}
@@ -328,9 +328,9 @@ export default function Checkout() {
             </div>
 
             <button
-              className="btn-primary"
-              type="submit"
-            >
+  className="toy-checkout-submit-btn"
+  type="submit"
+>
               {paymentMethod === "Razorpay"
                 ? `Pay ₹${total}`
                 : "Place Order"}
@@ -339,7 +339,7 @@ export default function Checkout() {
           </div>
         </form>
 
-        <aside className="card checkout-summary toy-checkout-summary">
+       <aside className="toy-checkout-summary">
 
           <h2>Products</h2>
 

@@ -1,237 +1,911 @@
-/* ==========================================================
-   PROFILE PAGE
-========================================================== */
+/* =========================================================
+   TOYLAND PREMIUM PROFILE PAGE
+========================================================= */
 
-.profile-card {
-  margin-top: 30px;
-  padding: 35px;
-  border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 45px rgba(15,23,42,.06);
+.toy-profile-page {
+  --profile-primary: #087f5b;
+  --profile-secondary: #12b886;
+  --profile-accent: #38d9a9;
+  --profile-dark: #102a24;
+  --profile-text: #536b64;
+  --profile-muted: #8a9c96;
+  --profile-white: #ffffff;
+  --profile-light: #effff9;
+  --profile-soft: #f7fffc;
+  --profile-border: rgba(8, 127, 91, 0.14);
+  --profile-danger: #dc2626;
+
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+
+  padding: 80px 18px 110px;
+
+  font-family:
+    "Plus Jakarta Sans",
+    "Poppins",
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(56, 217, 169, 0.2),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 94% 18%,
+      rgba(18, 184, 134, 0.15),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 72% 92%,
+      rgba(8, 127, 91, 0.09),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #effff9 0%,
+      #ffffff 48%,
+      #f3fffb 100%
+    );
 }
 
-/* ==========================================================
-   PROFILE INFO
-========================================================== */
+.toy-profile-page::before,
+.toy-profile-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
 
-.profile-row {
-  display: flex;
-  justify-content: space-between;
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.toy-profile-page::before {
+  top: -190px;
+  left: -150px;
+
+  width: 410px;
+  height: 410px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(56, 217, 169, 0.25),
+    rgba(18, 184, 134, 0.03)
+  );
+
+  animation:
+    toyProfileShapeOne
+    12s ease-in-out infinite;
+}
+
+.toy-profile-page::after {
+  right: -160px;
+  bottom: -190px;
+
+  width: 370px;
+  height: 370px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(8, 127, 91, 0.18),
+    rgba(56, 217, 169, 0.03)
+  );
+
+  animation:
+    toyProfileShapeTwo
+    14s ease-in-out infinite;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.toy-profile-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1080px;
+
+  margin: 0 auto;
+}
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.toy-profile-title {
+  position: relative;
+
+  margin: 0;
+
+  color: var(--profile-dark);
+
+  font-size: clamp(
+    36px,
+    5vw,
+    54px
+  );
+
+  font-weight: 950;
+  line-height: 1.08;
+  letter-spacing: -2px;
+
+  animation:
+    toyProfileTitleIn
+    0.7s ease both;
+}
+
+.toy-profile-title::before {
+  content: "ACCOUNT CENTER";
+
+  display: block;
+  width: fit-content;
+
+  margin-bottom: 13px;
+  padding: 8px 15px;
+
+  color: var(--profile-primary);
+
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 2px;
+
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.14);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.76);
+
+  box-shadow:
+    0 8px 20px
+    rgba(8, 127, 91, 0.07);
+}
+
+.toy-profile-title::after {
+  content: "";
+
+  display: block;
+
+  width: 68px;
+  height: 4px;
+
+  margin-top: 16px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    var(--profile-primary),
+    var(--profile-accent)
+  );
+
+  box-shadow:
+    0 5px 15px
+    rgba(18, 184, 134, 0.28);
+}
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.toy-profile-card {
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 38px;
+  padding: 39px;
+
+  border:
+    1px solid
+    var(--profile-border);
+
+  border-radius: 32px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.11),
+      transparent 35%
+    ),
+    rgba(255, 255, 255, 0.87);
+
+  box-shadow:
+    0 30px 75px
+    rgba(16, 42, 36, 0.11),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.96);
+
+  backdrop-filter: blur(23px);
+  -webkit-backdrop-filter:
+    blur(23px);
+
+  animation:
+    toyProfileCardIn
+    0.8s 0.08s ease both;
+
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.45s ease;
+}
+
+.toy-profile-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 76%;
+  height: 5px;
+
+  border-radius:
+    0 0 20px 20px;
+
+  background: linear-gradient(
+    90deg,
+    var(--profile-primary),
+    var(--profile-secondary),
+    var(--profile-accent)
+  );
+
+  box-shadow:
+    0 6px 18px
+    rgba(18, 184, 134, 0.27);
+
+  transform: translateX(-50%);
+}
+
+.toy-profile-card::after {
+  content: "";
+
+  position: absolute;
+  top: -160px;
+  right: -150px;
+
+  width: 320px;
+  height: 320px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(56, 217, 169, 0.14),
+    transparent 68%
+  );
+
+  pointer-events: none;
+}
+
+.toy-profile-card:hover {
+  border-color:
+    rgba(8, 127, 91, 0.23);
+
+  box-shadow:
+    0 38px 90px
+    rgba(8, 127, 91, 0.15),
+    0 0 0 7px
+    rgba(56, 217, 169, 0.035);
+}
+
+/* =========================================================
+   PROFILE INFORMATION
+========================================================= */
+
+.toy-profile-row {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: 180px 1fr;
   align-items: center;
+  gap: 25px;
 
-  padding: 18px 0;
+  min-height: 72px;
 
-  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 19px;
+
+  border-bottom:
+    1px solid
+    rgba(8, 127, 91, 0.1);
+
+  transition:
+    background 0.35s ease,
+    border-radius 0.35s ease,
+    transform 0.35s ease;
 }
 
-.profile-row:last-of-type {
+.toy-profile-row:first-child {
+  margin-top: 3px;
+}
+
+.toy-profile-row:last-of-type {
   border-bottom: none;
 }
 
-.profile-row strong {
-  color: #0f172a;
-  font-size: 15px;
-  font-weight: 700;
+.toy-profile-row:hover {
+  border-radius: 15px;
+
+  background:
+    rgba(239, 255, 249, 0.72);
+
+  transform: translateX(4px);
 }
 
-.profile-row span {
-  color: #64748b;
-  font-size: 15px;
-  font-weight: 500;
+.toy-profile-row strong {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--profile-dark);
+
+  font-size: 13.5px;
+  font-weight: 850;
+  line-height: 1.4;
+}
+
+.toy-profile-row strong::before {
+  content: "";
+
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    var(--profile-accent);
+
+  box-shadow:
+    0 0 0 5px
+    rgba(56, 217, 169, 0.11);
+}
+
+.toy-profile-row span {
+  min-width: 0;
+
+  color: var(--profile-text);
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7;
+
   text-align: right;
+  overflow-wrap: anywhere;
 }
 
-/* ==========================================================
+/* =========================================================
    ACTION GRID
-========================================================== */
+========================================================= */
 
 .user-profile-actions-grid {
-  margin-top: 32px;
+  position: relative;
+  z-index: 2;
 
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
-  gap: 18px;
+  gap: 17px;
+
+  margin-top: 32px;
+  padding-top: 30px;
+
+  border-top:
+    1px solid
+    rgba(8, 127, 91, 0.11);
 }
 
-/* ==========================================================
+/* =========================================================
    ACTION CARD
-========================================================== */
+========================================================= */
 
 .user-profile-action-card {
   position: relative;
 
-  padding: 22px;
+  display: flex;
+  min-height: 145px;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 
-  background: #ffffff;
+  padding: 24px;
 
-  border: 1px solid #e2e8f0;
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.11);
 
-  border-radius: 18px;
+  border-radius: 20px;
 
   cursor: pointer;
 
-  transition: all .3s ease;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 217, 169, 0.09),
+      transparent 43%
+    ),
+    rgba(255, 255, 255, 0.9);
 
-  overflow: hidden;
+  box-shadow:
+    0 13px 30px
+    rgba(16, 42, 36, 0.055),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.96);
+
+  transition:
+    border-color 0.35s ease,
+    transform 0.45s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+    box-shadow 0.4s ease;
 }
 
 .user-profile-action-card::before {
   content: "";
 
   position: absolute;
-
-  left: 0;
   top: 0;
+  left: 0;
 
   width: 5px;
   height: 100%;
 
+  border-radius:
+    0 10px 10px 0;
+
   background: linear-gradient(
     180deg,
-    #2563eb,
-    #4f46e5
+    var(--profile-primary),
+    var(--profile-accent)
   );
 
   transform: scaleY(0);
+  transform-origin: bottom;
 
-  transition: .3s;
+  transition:
+    transform 0.4s ease;
+}
+
+.user-profile-action-card::after {
+  content: "→";
+
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--profile-primary);
+
+  font-size: 18px;
+  font-weight: 900;
+
+  border:
+    1px solid
+    rgba(8, 127, 91, 0.13);
+
+  border-radius: 50%;
+
+  background:
+    var(--profile-light);
+
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    transform 0.4s ease;
+}
+
+.user-profile-action-card:hover {
+  border-color:
+    rgba(8, 127, 91, 0.28);
+
+  transform:
+    translateY(-7px);
+
+  box-shadow:
+    0 25px 48px
+    rgba(8, 127, 91, 0.13),
+    0 0 0 5px
+    rgba(56, 217, 169, 0.035);
 }
 
 .user-profile-action-card:hover::before {
   transform: scaleY(1);
 }
 
-.user-profile-action-card:hover {
-  transform: translateY(-5px);
+.user-profile-action-card:hover::after {
+  color: var(--profile-white);
 
-  border-color: #2563eb;
+  background: linear-gradient(
+    135deg,
+    var(--profile-primary),
+    var(--profile-secondary)
+  );
 
-  box-shadow: 0 18px 35px rgba(37,99,235,.12);
+  transform:
+    translateX(4px)
+    rotate(-8deg);
 }
 
 .user-profile-action-card h3 {
-  margin: 0 0 8px;
+  position: relative;
+  z-index: 2;
 
-  color: #0f172a;
+  max-width: calc(100% - 40px);
+
+  margin: 0 0 9px;
+
+  color: var(--profile-dark);
 
   font-size: 18px;
-
-  font-weight: 800;
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: -0.35px;
 }
 
 .user-profile-action-card p {
+  position: relative;
+  z-index: 2;
+
+  max-width: calc(100% - 30px);
+
   margin: 0;
 
-  color: #64748b;
+  color: var(--profile-text);
 
-  font-size: 14px;
-
-  line-height: 1.6;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.65;
 }
 
-/* ==========================================================
+/* =========================================================
    LOGOUT BUTTON
-========================================================== */
+========================================================= */
 
 .user-profile-logout-btn {
+  position: relative;
+
   grid-column: 1 / -1;
 
-  height: 58px;
+  display: inline-flex;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 
-  border: none;
+  padding: 13px 24px;
 
-  border-radius: 16px;
+  color: var(--profile-white);
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 15px;
+  outline: none;
+  cursor: pointer;
 
   background: linear-gradient(
     135deg,
     #ef4444,
-    #dc2626
+    #dc2626,
+    #b91c1c
   );
 
-  color: #ffffff;
+  background-size: 200% 200%;
 
-  font-size: 16px;
+  box-shadow:
+    0 17px 35px
+    rgba(220, 38, 38, 0.24),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.18);
 
-  font-weight: 700;
+  transition:
+    background-position 0.45s ease,
+    transform 0.4s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+    box-shadow 0.4s ease;
+}
 
-  cursor: pointer;
+.user-profile-logout-btn::before {
+  content: "";
 
-  transition: .3s ease;
+  position: absolute;
+  top: -75%;
+  left: -55%;
 
-  box-shadow: 0 15px 30px rgba(239,68,68,.22);
+  width: 34%;
+  height: 250%;
+
+  transform: rotate(24deg);
+
+  background:
+    rgba(255, 255, 255, 0.28);
+
+  transition: left 0.7s ease;
 }
 
 .user-profile-logout-btn:hover {
-  transform: translateY(-3px);
+  background-position:
+    right center;
 
-  box-shadow: 0 20px 40px rgba(239,68,68,.30);
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 24px 46px
+    rgba(220, 38, 38, 0.32),
+    0 0 0 5px
+    rgba(239, 68, 68, 0.07);
 }
 
-/* ==========================================================
+.user-profile-logout-btn:hover::before {
+  left: 130%;
+}
+
+.user-profile-logout-btn:active {
+  transform:
+    translateY(-1px)
+    scale(0.98);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes toyProfileTitleIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toyProfileCardIn {
+  from {
+    opacity: 0;
+    transform:
+      translateY(35px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes toyProfileShapeOne {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        40px,
+        28px,
+        0
+      )
+      scale(1.08);
+  }
+}
+
+@keyframes toyProfileShapeTwo {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        -34px,
+        -25px,
+        0
+      )
+      scale(1.1);
+  }
+}
+
+/* =========================================================
    TABLET
-========================================================== */
+========================================================= */
 
-@media (max-width:768px){
-
-  .profile-card{
-    padding:24px;
+@media (max-width: 768px) {
+  .toy-profile-page {
+    padding:
+      65px 16px 105px;
   }
 
-  .user-profile-actions-grid{
-    grid-template-columns:1fr;
+  .toy-profile-card {
+    padding: 28px;
+    border-radius: 27px;
   }
 
-  .profile-row{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:8px;
+  .toy-profile-row {
+    grid-template-columns:
+      145px 1fr;
+
+    gap: 18px;
   }
 
-  .profile-row span{
-    text-align:left;
+  .user-profile-action-card {
+    min-height: 135px;
+    padding: 21px;
   }
-
 }
 
-/* ==========================================================
+/* =========================================================
    MOBILE
-========================================================== */
+========================================================= */
 
-@media (max-width:480px){
-
-  .profile-card{
-    padding:18px;
-    border-radius:18px;
+@media (max-width: 600px) {
+  .toy-profile-page {
+    padding:
+      48px 12px 95px;
   }
 
-  .profile-row{
-    padding:14px 0;
+  .toy-profile-container {
+    width: 100%;
   }
 
-  .profile-row strong,
-  .profile-row span{
-    font-size:14px;
+  .toy-profile-title {
+    font-size: 32px;
+    letter-spacing: -1.2px;
   }
 
-  .user-profile-action-card{
-    padding:18px;
-    border-radius:14px;
+  .toy-profile-title::before {
+    padding: 7px 12px;
+
+    font-size: 8px;
+    letter-spacing: 1.6px;
   }
 
-  .user-profile-action-card h3{
-    font-size:16px;
+  .toy-profile-card {
+    margin-top: 30px;
+    padding: 19px;
+
+    border-radius: 22px;
   }
 
-  .user-profile-action-card p{
-    font-size:13px;
+  .toy-profile-row {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+
+    padding: 16px 11px;
   }
 
-  .user-profile-logout-btn{
-    height:52px;
-    font-size:14px;
-    border-radius:14px;
+  .toy-profile-row:hover {
+    transform: translateX(0);
   }
 
+  .toy-profile-row strong {
+    font-size: 12.5px;
+  }
+
+  .toy-profile-row span {
+    width: 100%;
+
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .user-profile-actions-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-top: 23px;
+    padding-top: 23px;
+  }
+
+  .user-profile-action-card {
+    min-height: 125px;
+
+    padding: 19px;
+
+    border-radius: 17px;
+  }
+
+  .user-profile-action-card h3 {
+    font-size: 16.5px;
+  }
+
+  .user-profile-action-card p {
+    font-size: 12.5px;
+  }
+
+  .user-profile-action-card::after {
+    right: 16px;
+    bottom: 15px;
+
+    width: 33px;
+    height: 33px;
+
+    font-size: 16px;
+  }
+
+  .user-profile-logout-btn {
+    min-height: 52px;
+
+    font-size: 13px;
+    border-radius: 13px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.user-profile-action-card:focus-visible,
+.user-profile-logout-btn:focus-visible {
+  outline:
+    3px solid
+    rgba(56, 217, 169, 0.5);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .toy-profile-page,
+  .toy-profile-page *,
+  .toy-profile-page *::before,
+  .toy-profile-page *::after {
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
 }

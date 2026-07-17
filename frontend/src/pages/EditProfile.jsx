@@ -45,13 +45,13 @@ export default function EditProfile() {
   };
 
   return (
-    <section className="page-section">
-      <div className="container">
+    <section className="toy-edit-profile-page">
+     <div className="toy-profile-card">
         <div className="card profile-card">
           <h2>Edit Profile</h2>
 
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="toy-profile-form-group">
               <label>Name</label>
               <input
                 type="text"
@@ -63,7 +63,7 @@ export default function EditProfile() {
               />
             </div>
 
-            <div className="form-group">
+            <div className="toy-profile-form-group">
               <label>Mobile Number</label>
               <input
                 type="text"
@@ -75,7 +75,7 @@ export default function EditProfile() {
               />
             </div>
 
-            <div className="form-group">
+            <div className="toy-profile-form-group">
               <label>Email</label>
 
               <input
@@ -88,9 +88,9 @@ export default function EditProfile() {
             </div>
 
             <button
-              className="btn-primary"
-              disabled={loading}
-            >
+  className="toy-profile-save-btn"
+  disabled={loading}
+>
               {loading
                 ? "Updating..."
                 : "Save Changes"}

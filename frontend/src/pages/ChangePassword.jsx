@@ -71,7 +71,7 @@ return;
   };
 
   return (
-    <section className="page-section">
+    <section className="toy-change-password-page">
       <div className="container">
         <div className="change-password-card">
           <h2>

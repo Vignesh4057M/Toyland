@@ -1,76 +1,206 @@
-import React, { useEffect, useMemo, useState } from "react";
-import api from "../api/api";
-import ProductCard from "../components/ProductCard";
-import "./ProductList.css";
+import React, {
+  useEffect,
+  useState,
+} from "react";
+import {
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import api, {
+  imgUrl,
+} from "../api/api";
+import "./ProductDetails.css";
 
-const categories = ["All", "Educational Toys", "Action Figures", "Building Blocks", "Soft Toys", "Baby Toys", "Outdoor Toys", "Puzzle Toys", "Remote Control Toys"];
+export default function ProductDetails() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-export default function ProductList({ category }) {
-  const [products, setProducts] = useState([]);
-const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(category || "All");
+  const [product, setProduct] =
+    useState(null);
+
+  const [loading, setLoading] =
+    useState(true);
 
   useEffect(() => {
-  const params = {};
+    setLoading(true);
 
-  if (selectedCategory !== "All")
-    params.category = selectedCategory;
+    api
+      .get(`/products/${id}`)
+      .then((res) => {
+        setProduct(res.data);
+      })
+      .catch(() => {
+        setProduct(null);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [id]);
 
-  if (search)
-    params.search = search;
+  const addToCart = async () => {
+    try {
+      await api.post("/cart", {
+        product: product._id,
+        quantity: 1,
+      });
 
-  setLoading(true);
+      navigate("/success", {
+        state: {
+          type: "cart",
+        },
+      });
+    } catch {
+      navigate("/login", {
+        state: {
+          message:
+            "Please login first",
+        },
+      });
+    }
+  };
 
-  api
-    .get("/products", { params })
-    .then((response) => {
-      setProducts(response.data);
-    })
-    .catch(() => {
-      setProducts([]);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
+  const addToFavourite =
+    async () => {
+      try {
+        await api.post(
+          "/favourites",
+          {
+            product: product._id,
+          }
+        );
 
-}, [selectedCategory, search]);
+        navigate("/success", {
+          state: {
+            type: "wishlist",
+          },
+        });
+      } catch {
+        navigate("/login", {
+          state: {
+            message:
+              "Please login first",
+          },
+        });
+      }
+    };
 
-  const title = useMemo(() => selectedCategory === "All" ? "All Toys" : selectedCategory, [selectedCategory]);
+  if (loading) {
+    return (
+      <section className="toy-product-details-page">
+        <div className="toyland-loader">
+          <div className="toy-spinner"></div>
+
+          <h3>
+            Loading Product...
+          </h3>
+        </div>
+      </section>
+    );
+  }
+
+  if (!product) {
+    return (
+      <section className="toy-product-details-page">
+        <div className="toy-product-empty-state">
+          Product not found.
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="page-section">
-      <div className="container">
-        <div className="shop-header">
-          <h1 className="page-title">{title}</h1>
-          <p className="page-subtitle">Search and filter ToyLand products.</p>
-          <div className="shop-filter card" style={{ padding: 16 }}>
-            <input className="input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search toys..." />
-            <select className="input" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-              {categories.map((item) => <option key={item} value={item}>{item}</option>)}
-            </select>
-          </div>
+    <section className="toy-product-details-page">
+      <div className="toy-product-details-container details-grid">
+        <div className="details-image-card">
+          <img
+            src={imgUrl(
+              product.images?.[0]
+            )}
+            alt={
+              product.name ||
+              "Toy product"
+            }
+          />
         </div>
-        <div className="product-grid-wrap">
-          {loading ? (
-    <div className="toyland-loader">
-        <div className="toy-spinner"></div>
-        <h3>Loading Toys...</h3>
-    </div>
-) : products.length ? (
-    <div className="grid-4">
-        {products.map((product) => (
-            <ProductCard
-                key={product._id}
-                p={product}
-            />
-        ))}
-    </div>
-) : (
-    <div className="card empty-state">
-        No toys found.
-    </div>
-)}
+
+        <div className="details-content">
+          <p className="details-category">
+            {product.mainCategory ||
+              "ToyLand Product"}
+          </p>
+
+          <h1 className="details-title">
+            {product.name}
+          </h1>
+
+          <p className="details-list">
+            {product.about ||
+              product.description ||
+              "Premium toy product from ToyLand."}
+          </p>
+
+          <div className="details-price">
+            ₹
+            {product.discountPrice ||
+              product.price}
+
+            {product.discountPrice && (
+              <span>
+                ₹{product.price}
+              </span>
+            )}
+          </div>
+
+          <p className="details-list">
+            <strong>Stock:</strong>{" "}
+            {product.stock} pieces
+          </p>
+
+          <p className="details-list">
+            <strong>
+              Sub Category:
+            </strong>{" "}
+            {product.subCategory ||
+              "Toys"}
+          </p>
+
+          <div className="details-actions">
+            <button
+              type="button"
+              className="toy-product-cart-btn"
+              onClick={addToCart}
+            >
+              Add to Cart
+            </button>
+
+            <button
+              type="button"
+              className="toy-product-soft-btn"
+              onClick={
+                addToFavourite
+              }
+            >
+              Add to Wishlist
+            </button>
+
+            <button
+              type="button"
+              className="toy-product-soft-btn"
+              onClick={() =>
+                navigate(
+                  "/checkout",
+                  {
+                    state: {
+                      buyNow:
+                        product,
+                    },
+                  }
+                )
+              }
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
       </div>
     </section>
